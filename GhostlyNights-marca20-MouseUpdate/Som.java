@@ -94,6 +94,7 @@ public class Som
     public static void pararMusicaMenu()
     {
         menuMusica.stop();
+        if(testeSom)
         menuMusica.setVolume(volume);
     }
     
@@ -102,9 +103,12 @@ public class Som
      */
     public static void tocarDeathSound()
     {
-        deathSound = new GreenfootSound ("enemyDeath.mp3");
-        deathSound.play();
-        deathSound.setVolume(40);
+        if(testeSom)
+        {
+            deathSound = new GreenfootSound ("enemyDeath.mp3");
+            deathSound.play();
+            deathSound.setVolume(40);            
+        }
     }
     
     /**
@@ -112,9 +116,12 @@ public class Som
      */
     public static void tocarPegarCoracao()
     {
-        pegarCoracaoSom = new GreenfootSound ("heartPickupSound.mp3");
-        pegarCoracaoSom.play();
-        pegarCoracaoSom.setVolume(50);
+        if(testeSom)
+        {
+            pegarCoracaoSom = new GreenfootSound ("heartPickupSound.mp3");
+            pegarCoracaoSom.play();
+            pegarCoracaoSom.setVolume(50);      
+        }
     }
     
     /**
@@ -122,9 +129,12 @@ public class Som
      */
     public static void tocarPegarEsmeralda()
     {
-        pegarEsmeraldaSom = new GreenfootSound("pegarEsmeraldaSomNovo.mp3");
-        pegarEsmeraldaSom.play();
-        pegarEsmeraldaSom.setVolume(50);
+        if(testeSom)
+        {
+            pegarEsmeraldaSom = new GreenfootSound("pegarEsmeraldaSomNovo.mp3");
+            pegarEsmeraldaSom.play();
+            pegarEsmeraldaSom.setVolume(50);
+        }
     }
     
     /**
@@ -132,9 +142,12 @@ public class Som
      */
     public static void tocarSomBolaDeFogo()
     {
-        bolaDeFogoSom = new GreenfootSound ("bolaDeFogo.mp3");
-        bolaDeFogoSom.play();
-        bolaDeFogoSom.setVolume(40);
+        if(testeSom)
+        {
+            bolaDeFogoSom = new GreenfootSound ("bolaDeFogo.mp3");
+            bolaDeFogoSom.play();
+            bolaDeFogoSom.setVolume(40);
+        }
     }
     
     /**
