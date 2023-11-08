@@ -171,6 +171,24 @@ public class MeuMundo extends World
             +"- Voce matou "+ player.getInimigosMortos() + " inimigos" + "\n" + "- Nivel do Player: " + player.getNivelPlayer() + "\n"
             + "- Nivel Inimigo: "+ inimigo.getNivelInimigo() + "\n" + "Aperte R para recomeçar!", 400, 300);
     }
+
+    public void modoAutomatico(boolean testeModo)
+    {
+        if(testeModo)
+        {
+            player.setModoAutomatico(true);
+            player.setModoManual(false);
+        }   
+    }
+
+    public void modoManual(boolean testeModo)
+    {
+        if(testeModo)
+        {
+            player.setModoManual(true);
+            player.setModoAutomatico(false);
+        }   
+    }
 }
     
     

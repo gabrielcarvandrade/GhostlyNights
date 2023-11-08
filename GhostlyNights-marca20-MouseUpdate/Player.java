@@ -27,6 +27,8 @@ public class Player extends Actor
     private boolean estaVivo;
     private boolean removido; // Booleano para evitar remoção repetida
     private boolean somFunciona;
+    private boolean modoManual;
+    private boolean modoAutomatico;
 
     /**
      * Construtor da classe Player
@@ -88,8 +90,16 @@ public class Player extends Actor
             heal();
             pegarEsmeralda();
             inimigoMaisProximo();
-            lançaMagia();
-            lançaMagiaUlt();
+            if(modoManual)
+            {
+                lançaMagia();
+                lançaMagiaUlt();
+            }
+            else if (modoAutomatico)
+            {
+                lançaMagiaAutomatico();
+                lançaMagiaUltAutomatico();
+            }
             aumentarAtributos();
             verificaColisao();
         }
@@ -304,8 +314,8 @@ public class Player extends Actor
     
     /*
      * Adiciona uma bola de fogo que vai em direçao ao inimigo mais proximo de tempo em tempo
-     *
-    private void lançaMagia()
+     */
+    private void lançaMagiaAutomatico()
     {
         World mundo = getWorld();
         BolaDeFogo bolaDeFogo = new BolaDeFogo(this);
@@ -320,11 +330,37 @@ public class Player extends Actor
             }
         }
     }
-    */    
+
     /**
      * Adiciona uma bola de fogo que vai em direçao ao inimigo mais proximo de tempo em tempo
      */
-    private void lançaMagia()
+    private void lançaMagiaUltAutomatico()
+    {
+        if(pontosUlt >= 20)
+        {
+            if(Inimigo.class!=null)
+            {
+                if (Greenfoot.isKeyDown("SPACE")) 
+                {
+                    World mundo = getWorld();
+                    UltBolaDeFogo ultBolaDeFogo = new UltBolaDeFogo(this);
+                    mundo.addObject(ultBolaDeFogo, getX(), getY());
+                    Som.tocarSomBolaDeFogo();
+                    if (inimigoProximo != null)
+                    {
+                        ultBolaDeFogo.turnTowards(inimigoProximo.getX(), inimigoProximo.getY()); // faz a bola ir em direçao ao primeiro inimigo detectado pelo metodo getNeighbours 
+                    }
+                    pontosUlt -= 20;
+                }
+            }
+            barraUlt.lançaUlt();
+        }
+    }
+
+    /**
+     * Adiciona uma bola de fogo que vai em direçao ao inimigo mais proximo de tempo em tempo
+     */
+    private void lançaMagiaManual()
     {
         World mundo = getWorld();
         BolaDeFogo bolaDeFogo = new BolaDeFogo(this);
@@ -345,7 +381,7 @@ public class Player extends Actor
     /**
      * Adiciona uma bola de fogo que vai em direçao ao inimigo mais proximo de tempo em tempo
      */
-    private void lançaMagiaUlt()
+    private void lançaMagiaUltManual()
     {
         if(pontosUlt >= 20)
         {
@@ -419,5 +455,15 @@ public class Player extends Actor
     public int getExperiencia()
     {
         return experiencia;
+    }
+
+    public void setModoAutomatico(boolean modoAutomatico)
+    {
+        this.modoAutomatico = modoAutomatico;
+    }
+
+    public void setModoManual(boolean modoManual)
+    {
+        this.modoManual = modoManual;
     }
 }

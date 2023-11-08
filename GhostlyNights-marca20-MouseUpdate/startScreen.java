@@ -6,6 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class startScreen extends World
 {
+    MeuMundo mundo;
     /**
      * Construtor da classe startScreen.
      * 
@@ -13,6 +14,7 @@ public class startScreen extends World
     public startScreen()
     {    
         super(800, 600, 1);
+        mundo = new MeuMundo();
     }
     
     /**
@@ -20,10 +22,28 @@ public class startScreen extends World
      */
     public void act()
     {
+        modoDeJogabilidade();
         startGame();
         regularVolume();
     }
     
+    /**
+     * Método que controla o modo de jogabilidade
+     */
+    private void modoDeJogabilidade()
+    {
+        if(Greenfoot.isKeyDown("A"))
+        {
+            mundo.modoAutomatico(true);
+            mundo.modoManual(false);    
+        }
+        else if(Greenfoot.isKeyDown("M"))
+        {
+            mundo.modoManual(true);
+            mundo.modoAutomatico(false);
+        }
+    }
+
     /**
      * Metodo que cuida de criar o World MeuMundo e parar a musica da tela de menu
      */
