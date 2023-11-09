@@ -4,17 +4,18 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * Classe com herança de World que serve como tela inicial do jogo.
  * 
  */
-public class startScreen extends World
+public class StartScreen extends World
 {
-    MeuMundo mundo;
+    private boolean modoAutomatico;
+    private boolean modoManual;
+    
     /**
      * Construtor da classe startScreen.
      * 
      */
-    public startScreen()
+    public StartScreen()
     {    
         super(800, 600, 1);
-        mundo = new MeuMundo();
     }
     
     /**
@@ -34,13 +35,11 @@ public class startScreen extends World
     {
         if(Greenfoot.isKeyDown("A"))
         {
-            mundo.modoAutomatico(true);
-            mundo.modoManual(false);    
+            modoAutomatico = true;    
         }
         else if(Greenfoot.isKeyDown("M"))
         {
-            mundo.modoManual(true);
-            mundo.modoAutomatico(false);
+            modoAutomatico = false;
         }
     }
 
@@ -49,7 +48,7 @@ public class startScreen extends World
      */
     public void startGame(){
         if (Greenfoot.isKeyDown("enter")){
-            Greenfoot.setWorld(new MeuMundo());
+            Greenfoot.setWorld(new MeuMundo(modoAutomatico));
             Som.pararMusicaMenu();
         }
     }

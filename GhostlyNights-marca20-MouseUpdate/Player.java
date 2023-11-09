@@ -27,14 +27,13 @@ public class Player extends Actor
     private boolean estaVivo;
     private boolean removido; // Booleano para evitar remoção repetida
     private boolean somFunciona;
-    private boolean modoManual;
     private boolean modoAutomatico;
 
     /**
      * Construtor da classe Player
      * inicializa todas as variáveis principais
      */
-    public Player() 
+    public Player(boolean modoAutomatico) 
     {
         inimigosMortos = 0;
         experiencia = inimigosMortos;
@@ -55,7 +54,7 @@ public class Player extends Actor
         
         setImage(image[0]);
         
-        
+        this.modoAutomatico = modoAutomatico;
         // Cria a barra de HP
         barraDeHP = new BarraDeHP(this, hp);
         // Cria barra que mostra carregamento da Ult
@@ -90,15 +89,16 @@ public class Player extends Actor
             heal();
             pegarEsmeralda();
             inimigoMaisProximo();
-            if(modoManual)
-            {
-                lançaMagia();
-                lançaMagiaUlt();
-            }
-            else if (modoAutomatico)
+            
+            if (modoAutomatico)
             {
                 lançaMagiaAutomatico();
                 lançaMagiaUltAutomatico();
+            }
+            else
+            {
+                lançaMagiaManual();
+                lançaMagiaUltManual();
             }
             aumentarAtributos();
             verificaColisao();
@@ -455,15 +455,5 @@ public class Player extends Actor
     public int getExperiencia()
     {
         return experiencia;
-    }
-
-    public void setModoAutomatico(boolean modoAutomatico)
-    {
-        this.modoAutomatico = modoAutomatico;
-    }
-
-    public void setModoManual(boolean modoManual)
-    {
-        this.modoManual = modoManual;
     }
 }

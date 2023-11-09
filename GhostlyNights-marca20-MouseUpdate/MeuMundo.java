@@ -14,6 +14,7 @@ public class MeuMundo extends World
     private int randomizadorAltura;
     private int randomizadorLargura;
     private int randomizadorSpawn;
+    private boolean modoAutomatico;
   
     private GreenfootSound music;
     private World world;
@@ -24,10 +25,11 @@ public class MeuMundo extends World
     /**
      * Construtor da classe MeuMundo
      */
-    public MeuMundo() 
+    public MeuMundo(boolean modoAutomatico) 
     {
         super(800, 600, 1);
-        player = new Player();
+        this.modoAutomatico = modoAutomatico;
+        player = new Player(modoAutomatico);
         bolaDeFogo = new BolaDeFogo(player);
         iconeEsmeralda = new EsmeraldaDeXp();
         count = 0;
@@ -121,7 +123,7 @@ public class MeuMundo extends World
         {
             Som.pararMusicaTema();
             if (Greenfoot.isKeyDown("r"))
-                Greenfoot.setWorld(new MeuMundo());
+                Greenfoot.setWorld(new MeuMundo(modoAutomatico));
         }
     }
     
@@ -170,24 +172,6 @@ public class MeuMundo extends World
         showText("Você perdeu! " + "\n" + "- Voce sobreviveu por " + (player.getTempo()/60) + " segundos" + "\n" 
             +"- Voce matou "+ player.getInimigosMortos() + " inimigos" + "\n" + "- Nivel do Player: " + player.getNivelPlayer() + "\n"
             + "- Nivel Inimigo: "+ inimigo.getNivelInimigo() + "\n" + "Aperte R para recomeçar!", 400, 300);
-    }
-
-    public void modoAutomatico(boolean testeModo)
-    {
-        if(testeModo)
-        {
-            player.setModoAutomatico(true);
-            player.setModoManual(false);
-        }   
-    }
-
-    public void modoManual(boolean testeModo)
-    {
-        if(testeModo)
-        {
-            player.setModoManual(true);
-            player.setModoAutomatico(false);
-        }   
     }
 }
     
