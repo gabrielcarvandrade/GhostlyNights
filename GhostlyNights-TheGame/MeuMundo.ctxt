@@ -1,8 +1,8 @@
 #BlueJ class context
 comment0.target=MeuMundo
 comment0.text=\r\n\ Classe\ com\ heran\u00E7a\ de\ World,\ respons\u00E1vel\ pela\ cria\u00E7\u00E3o\ e\ posi\u00E7\u00E3o\ de\ todos\ os\ objetos\ do\ jogo.\r\n\ \r\n\ @authors\ Gabriel\ Carvalho,\ Alexandre\ Carvalhaes,\ Douglas\ Slves,\ Ayron\ Sanfra.\ \r\n\ @version\ Marca\ 20.0\r\n
-comment1.params=
-comment1.target=MeuMundo()
+comment1.params=modoAutomatico
+comment1.target=MeuMundo(boolean)
 comment1.text=\r\n\ Construtor\ da\ classe\ MeuMundo\r\n
 comment10.params=
 comment10.target=void\ aumentarVelocidadeSpawn()
