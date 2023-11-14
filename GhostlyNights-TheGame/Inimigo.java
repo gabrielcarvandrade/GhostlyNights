@@ -12,10 +12,10 @@ public class Inimigo extends Actor
     private int dano;
     private int rotacao;
     private static int nivelInimigo;
-    
+
     private Player player;
     
-    boolean aumentaSpawn = false;
+    private static boolean aumentaSpawn;
     
     /**
      * Construtor da classe Inimigo
@@ -26,6 +26,7 @@ public class Inimigo extends Actor
         vida = 20;
         dano = 20;
         nivelInimigo = getNivelInimigo();
+        aumentaSpawn = false;
         setImage(new GreenfootImage("Fantasminha2.png"));
         getImage().scale(55, 55);
     }
@@ -36,10 +37,7 @@ public class Inimigo extends Actor
      */
     public void act() 
     {
-        //setRotation(rotacao);
         movimentar();
-        //rotacao = getRotation();
-        //setRotation(0);
         aumentarDificuldade();
     }
     
@@ -63,13 +61,9 @@ public class Inimigo extends Actor
     {
         if (player.getTempo()/60 >= 15*nivelInimigo)
         {
-            vida += 3*nivelInimigo;
-            dano += 3*nivelInimigo;
+            dano+=5;
             nivelInimigo++;
         }
-        aumentaSpawn = true;
-        aumentarSpawnFantasma();
-        aumentaSpawn = false;
     }
     
     /**
@@ -91,8 +85,10 @@ public class Inimigo extends Actor
     /**
      * Metodo de acesso ao nivel do inimigo.
      */
-    public int getNivelInimigo()
+    public static int getNivelInimigo()
     {
+        if(nivelInimigo == 0)
+        nivelInimigo = 1;
         return nivelInimigo;
     }
     
@@ -102,13 +98,5 @@ public class Inimigo extends Actor
     public void alterarVida(int dano)
     {
         vida -= dano;
-    }
-    
-    /**
-     * Aumenta o spawn de inimigos
-     */
-    public boolean aumentarSpawnFantasma()
-    {
-        return aumentaSpawn;
     }
 }

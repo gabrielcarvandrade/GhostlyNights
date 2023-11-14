@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class BolaDeFogo extends Actor
 {
     private int velocidade;
-    private int dano;
+    private static int dano;
     private int volume;
     
     private GreenfootImage imagem;
@@ -29,7 +29,7 @@ public class BolaDeFogo extends Actor
         this.player = player;
         barraUlt = new BarraUlt(player);
         velocidade = 5;
-        dano = 10;
+        dano = getDano();
         volume = 40;
         imagem = new GreenfootImage("magia1.png");
         imagem.scale(19, 12);
@@ -79,16 +79,18 @@ public class BolaDeFogo extends Actor
     /**
      * Retorna o dano da bola de fogo
      */
-    public int getDano()
+    public static int getDano()
     {
+        if(dano == 0)
+        dano = 10;
         return dano;
     }
     
     /**
      * Aumenta o dano da bola de fogo
      */
-    public void aumentarDano()
+    public static void aumentarDano()
     {
-        dano += 3*player.getNivelPlayer();
+        dano += 4;
     }
 }

@@ -26,7 +26,7 @@ public class BarraExperiencia extends Actor
         experienciaNecessaria = 15*player.getNivelPlayer();
         experiencia = player.getExperiencia();
         larguraOriginal = 600;
-        barra = new GreenfootImage(larguraOriginal, 10);
+        barra = new GreenfootImage(larguraOriginal, 12);
         esmeralda = new GreenfootImage("Esmeralda.png");
         atualizaImagem();
     }
@@ -50,10 +50,10 @@ public class BarraExperiencia extends Actor
     private void atualizaImagem() {
         barra.clear();
         if (experiencia > 0) {
-            // Calcula a nova largura da barra baseada no HP restante
+            // Calcula a nova largura da barra baseada na Xp que falta
             int novaLargura = (experiencia * larguraOriginal) / experienciaNecessaria;
             barra.setColor(Color.GREEN);
-            barra.fillRect(0, 0, novaLargura, 10);
+            barra.fillRect(0, 0, novaLargura, 12);
         }
         setImage(barra);
     }

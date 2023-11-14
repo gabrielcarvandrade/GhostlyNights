@@ -14,13 +14,16 @@ public class MeuMundo extends World
     private int randomizadorAltura;
     private int randomizadorLargura;
     private int randomizadorSpawn;
+    private static int nivelInimigo;
     private boolean modoAutomatico;
   
     private GreenfootSound music;
+    private GreenfootImage bordaXp;
     private World world;
     private BolaDeFogo bolaDeFogo;
     private EsmeraldaDeXp iconeEsmeralda;
     private Player player;
+    private ObjetosExternos objetosExternos;
     
     /**
      * Construtor da classe MeuMundo
@@ -29,9 +32,11 @@ public class MeuMundo extends World
     {
         super(800, 600, 1);
         this.modoAutomatico = modoAutomatico;
+        nivelInimigo = 1;
         player = new Player(modoAutomatico);
         bolaDeFogo = new BolaDeFogo(player);
         iconeEsmeralda = new EsmeraldaDeXp();
+        bordaXp = new GreenfootImage("BordaXP.png");
         count = 0;
         cooldownSpawnFantasma = 60;
         cooldownSpawnCoracao = 660;
@@ -51,7 +56,8 @@ public class MeuMundo extends World
         // Cria barra que mostra carregamento da Ult
         BarraUlt barraUlt = player.getBarraUlt();
         addObject(barraUlt, player.getX(), player.getY() + player.getImage().getHeight() + 5);
-        //Cria barra de experiencia
+        //Cria barra de experiencia e a borda
+        getBackground().drawImage(bordaXp, 75, 530+1/5);
         BarraExperiencia barraExperiencia = player.getBarraExperiencia();
         addObject(barraExperiencia, 400, 540);
         
@@ -68,6 +74,8 @@ public class MeuMundo extends World
             spawnarFantasmas();
             spawnarCoracoes();
             Som.regularVolume();
+            
+            aumentarVelocidadeSpawn();
         }
         else {
             mostrarPontuaçao();
@@ -156,10 +164,10 @@ public class MeuMundo extends World
      */
     public void aumentarVelocidadeSpawn()
     {
-        Inimigo inimigo = new Inimigo(player);
-        if(inimigo.aumentarSpawnFantasma() == true)
+        if(count % 900*Inimigo.getNivelInimigo() == 0)
         {
             cooldownSpawnFantasma--;
+            System.out.println("Cooldown: " + cooldownSpawnFantasma);
         }
     }
     
@@ -168,10 +176,26 @@ public class MeuMundo extends World
      */
     private void mostrarPontuaçao()
     {
-        Inimigo inimigo = new Inimigo(player); 
-        showText("Você perdeu! " + "\n" + "- Voce sobreviveu por " + (player.getTempo()/60) + " segundos" + "\n" 
+        int largura = 350;
+        int altura = 350;
+        
+        int x = (getWidth() - largura) / 2;
+        int y = (getHeight() - altura) / 2;
+        
+        GreenfootImage fundoPontuacao = new GreenfootImage(largura, altura);
+        fundoPontuacao.setColor(Color.WHITE);
+        fundoPontuacao.fillRect(0, 0, largura, altura);
+        
+        GreenfootImage textoPerdeu = getBackground();
+        textoPerdeu.drawImage(fundoPontuacao, x, y);
+        Font fontePerdeu = new Font(true, true, 50);
+        textoPerdeu.setFont(fontePerdeu);
+        textoPerdeu.setColor(Color.RED);
+        textoPerdeu.drawString("Você perdeu! ", 240, 200);
+        
+        showText("- Voce sobreviveu por " + (player.getTempo()/60) + " segundos" + "\n" 
             +"- Voce matou "+ player.getInimigosMortos() + " inimigos" + "\n" + "- Nivel do Player: " + player.getNivelPlayer() + "\n"
-            + "- Nivel Inimigo: "+ inimigo.getNivelInimigo() + "\n" + "Aperte R para recomeçar!", 400, 300);
+            + "- Nivel Inimigo: "+ Inimigo.getNivelInimigo() + "\n" + "Aperte R para recomeçar!", 400, 300);
     }
 }
     

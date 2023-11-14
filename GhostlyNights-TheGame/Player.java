@@ -402,6 +402,7 @@ public class Player extends Actor
         }
     }
     
+    /** 
     /**
      * Aumenta os atributos do jogador caso aumente de nivel
      */
@@ -409,10 +410,9 @@ public class Player extends Actor
     {
         if (experiencia >= barraExperiencia.getExperienciaNecessaria())
         {
-            BolaDeFogo bolaDeFogo = new BolaDeFogo(this);
-            maxHP += 3*nivelPlayer;
-            bolaDeFogo.aumentarDano();
             nivelPlayer++;
+            BolaDeFogo.aumentarDano();
+            if(nivelPlayer % 5 == 0)velocidade++;
             experiencia = 0;
         }
     }
