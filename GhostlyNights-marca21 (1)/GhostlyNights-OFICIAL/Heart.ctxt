@@ -1,7 +1,0 @@
-#BlueJ class context
-comment0.target=Heart
-comment0.text=\n\ Classe\ referente\ ao\ cora\u00E7\u00E3o,\ objeto\ que\ ao\ interagir\ com\ o\ player\ aumenta\ sua\ vida.\n\ \n\ @authors\ Gabriel\ Carvalho,\ Alexandre\ Carvalhaes,\ Douglas\ Slves,\ Ayron\ Sanfra.\ \n\ @version\ Marca\ 20.0\n
-comment1.params=
-comment1.target=void\ act()
-comment1.text=\n\ Act\ -\ do\ whatever\ the\ Heart\ wants\ to\ do.\ This\ method\ is\ called\ whenever\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\n
-numComments=2
