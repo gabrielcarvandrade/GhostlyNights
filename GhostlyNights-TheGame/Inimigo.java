@@ -10,12 +10,11 @@ public class Inimigo extends Actor
 {
     private int vida;
     private int dano;
+    private static int velocidade;
     private int rotacao;
     private static int nivelInimigo;
 
     private Player player;
-    
-    private static boolean aumentaSpawn;
     
     /**
      * Construtor da classe Inimigo
@@ -25,8 +24,8 @@ public class Inimigo extends Actor
         this.player = player;
         vida = 20;
         dano = 20;
+        velocidade = getVelocidade();
         nivelInimigo = getNivelInimigo();
-        aumentaSpawn = false;
         setImage(new GreenfootImage("Fantasminha2.png"));
         getImage().scale(55, 55);
     }
@@ -48,7 +47,7 @@ public class Inimigo extends Actor
     {
         if (player.isVivo())
         {
-            move(1);
+            move(velocidade);
             if (!isTouching(Player.class))
                 turnTowards(player.getX(), player.getY());
         }
@@ -63,6 +62,10 @@ public class Inimigo extends Actor
         {
             dano+=5;
             nivelInimigo++;
+            if(nivelInimigo % 15 == 0)
+            {
+                velocidade++;
+            }
         }
     }
     
@@ -90,6 +93,16 @@ public class Inimigo extends Actor
         if(nivelInimigo == 0)
         nivelInimigo = 1;
         return nivelInimigo;
+    }
+    
+    /**
+     * Metodo de acesso da velocidade do fantasma
+     */
+    public static int getVelocidade()
+    {
+        if(velocidade == 0)
+        velocidade = 1;
+        return velocidade;
     }
     
     /**

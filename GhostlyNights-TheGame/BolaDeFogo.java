@@ -91,6 +91,6 @@ public class BolaDeFogo extends Actor
      */
     public static void aumentarDano()
     {
-        dano += 4;
+        dano += 2;
     }
 }

@@ -27,7 +27,6 @@ public class BarraExperiencia extends Actor
         experiencia = player.getExperiencia();
         larguraOriginal = 600;
         barra = new GreenfootImage(larguraOriginal, 12);
-        esmeralda = new GreenfootImage("Esmeralda.png");
         atualizaImagem();
     }
     

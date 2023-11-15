@@ -1,4 +1,4 @@
-import greenfoot.*;
+ import greenfoot.*;
 
 /**
  * Classe com herança de World, responsável pela criação e posição de todos os objetos do jogo.
@@ -14,14 +14,19 @@ public class MeuMundo extends World
     private int randomizadorAltura;
     private int randomizadorLargura;
     private int randomizadorSpawn;
+    private int contadorDificuldade;
     private static int nivelInimigo;
+    
     private boolean modoAutomatico;
+    private boolean dificuldadePequena;
+    private boolean dificuldadeMedia;
+    private boolean dificuldadeMax;
   
     private GreenfootSound music;
-    private GreenfootImage bordaXp;
     private World world;
     private BolaDeFogo bolaDeFogo;
     private EsmeraldaDeXp iconeEsmeralda;
+    private GreenfootImage bordaXp;
     private Player player;
     private ObjetosExternos objetosExternos;
     
@@ -32,6 +37,9 @@ public class MeuMundo extends World
     {
         super(800, 600, 1);
         this.modoAutomatico = modoAutomatico;
+        dificuldadePequena = false;
+        dificuldadeMedia = false;
+        dificuldadeMax = false;
         nivelInimigo = 1;
         player = new Player(modoAutomatico);
         bolaDeFogo = new BolaDeFogo(player);
@@ -40,6 +48,7 @@ public class MeuMundo extends World
         count = 0;
         cooldownSpawnFantasma = 60;
         cooldownSpawnCoracao = 660;
+        contadorDificuldade = 0;
         prepare();
     }
     
@@ -56,7 +65,7 @@ public class MeuMundo extends World
         // Cria barra que mostra carregamento da Ult
         BarraUlt barraUlt = player.getBarraUlt();
         addObject(barraUlt, player.getX(), player.getY() + player.getImage().getHeight() + 5);
-        //Cria barra de experiencia e a borda
+        //Cria barra de experiencia
         getBackground().drawImage(bordaXp, 75, 530+1/5);
         BarraExperiencia barraExperiencia = player.getBarraExperiencia();
         addObject(barraExperiencia, 400, 540);
@@ -72,6 +81,19 @@ public class MeuMundo extends World
         count ++;
         if (player.isVivo()){
             spawnarFantasmas();
+            if(dificuldadePequena)
+            {
+               spawnarFantasmas();
+            } else if(dificuldadeMedia)
+            {
+               spawnarFantasmas();
+               spawnarFantasmas();
+            } else if(dificuldadeMax)
+            {
+               spawnarFantasmas();
+               spawnarFantasmas();
+               spawnarFantasmas();
+            }
             spawnarCoracoes();
             Som.regularVolume();
             
@@ -160,13 +182,25 @@ public class MeuMundo extends World
     }
     
     /**
-     * Método de aumento do atributo da velocidade de geração (Atualmente não usado, porém será util para proximas atualizaçoes)
+     * Método de aumento do atributo da velocidade de geração 
      */
     public void aumentarVelocidadeSpawn()
     {
         if(count % 900*Inimigo.getNivelInimigo() == 0)
         {
-            cooldownSpawnFantasma--;
+            cooldownSpawnFantasma-=3;
+            
+            contadorDificuldade++;
+            if(contadorDificuldade == 20)
+            {
+                dificuldadePequena = true;
+            } else if(contadorDificuldade == 35)
+            {
+                dificuldadeMedia = true;
+            } else if(contadorDificuldade == 50)
+            {
+                dificuldadeMax = true;
+            }
         }
     }
     
