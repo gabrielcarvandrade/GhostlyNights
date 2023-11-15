@@ -167,7 +167,6 @@ public class MeuMundo extends World
         if(count % 900*Inimigo.getNivelInimigo() == 0)
         {
             cooldownSpawnFantasma--;
-            System.out.println("Cooldown: " + cooldownSpawnFantasma);
         }
     }
     

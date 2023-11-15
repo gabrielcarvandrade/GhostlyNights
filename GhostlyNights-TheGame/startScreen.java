@@ -8,7 +8,7 @@ public class StartScreen extends World
 {
     private boolean modoAutomatico;
     private boolean modoManual;
-    
+
     /**
      * Construtor da classe startScreen.
      * 
@@ -16,8 +16,9 @@ public class StartScreen extends World
     public StartScreen()
     {    
         super(800, 600, 1);
+        modoAutomatico = true;
     }
-    
+
     /**
      * Classe que cuida do que deve acontecer enquanto o jogo estiver rodando na tela de menu
      */
@@ -26,8 +27,9 @@ public class StartScreen extends World
         modoDeJogabilidade();
         startGame();
         regularVolume();
+        instrucoes();
     }
-    
+
     /**
      * Método que controla o modo de jogabilidade
      */
@@ -52,7 +54,13 @@ public class StartScreen extends World
             Som.pararMusicaMenu();
         }
     }
-    
+
+    public void instrucoes(){
+        if (Greenfoot.isKeyDown("i")){
+            Greenfoot.setWorld(new Instrucoes());
+        }
+    }
+
     /**
      * Metodo que chama outro metodo da classe Som para aumentar ou diminuir o som do jogo
      */
@@ -60,7 +68,7 @@ public class StartScreen extends World
     {
         Som.regularVolume();
     }
-    
+
     /**
      * Metodo que chama um metodo da classe Som para inicar a musica que ira tocar durante a tela de menu
      */
@@ -69,7 +77,7 @@ public class StartScreen extends World
         Som som = new Som();
         som.tocarMusicaMenu();   
     }
-    
+
     /**
      * Metodo que chama outro metodo da classe Som para pausar o som
      */
