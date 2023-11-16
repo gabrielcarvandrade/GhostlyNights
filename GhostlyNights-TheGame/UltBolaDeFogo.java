@@ -9,7 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class UltBolaDeFogo extends Actor
 {
     private int velocidade;
-    private int dano;
+    private static int dano;
     private int volume;
     private GreenfootImage imagem;
     private Player player;

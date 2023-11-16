@@ -19,9 +19,9 @@ public class Player extends Actor
     private int experiencia;
     
     private GreenfootImage[] image;
-    private BarraDeHP barraDeHP;
-    private BarraUlt barraUlt;
-    private BarraExperiencia barraExperiencia;
+    private BarraDeHp barraDeHp;
+    private BarraDaUlt barraUlt;
+    private BarraDeExperiencia barraDeExperiencia;
     private Inimigo inimigoProximo;
     
     private boolean estaVivo;
@@ -56,11 +56,11 @@ public class Player extends Actor
         
         this.modoAutomatico = modoAutomatico;
         // Cria a barra de HP
-        barraDeHP = new BarraDeHP(this, hp);
+        barraDeHp = new BarraDeHp(this, hp, 40);
         // Cria barra que mostra carregamento da Ult
-        barraUlt = new BarraUlt(this);
+        barraUlt = new BarraDaUlt(this, 40);
         // Cria barra de experiencia
-        barraExperiencia = new BarraExperiencia(this);
+        barraDeExperiencia = new BarraDeExperiencia(600, this);
         
         removido = false;
     }
@@ -71,7 +71,7 @@ public class Player extends Actor
     public void adicionadoAoWorld(World world) 
     {
         if (world != null) 
-            world.addObject(barraDeHP, getX(), getY() + getImage().getHeight() / 2 + 7);
+            world.addObject(barraDeHp, getX(), getY() + getImage().getHeight() / 2 + 7);
     }
 
     /**
@@ -152,7 +152,7 @@ public class Player extends Actor
             if (inimigo != null) 
             {
                 hp -= inimigo.obterDanoInimigo();
-                barraDeHP.perdeHP(20); // Atualiza a barra de HP
+                barraDeHp.perdeHP(20); // Atualiza a barra de HP
                 tempoColisao = 30;
 
                 if (hp <= 0) 
@@ -181,7 +181,7 @@ public class Player extends Actor
                 removeTouching(Heart.class);
                 Som.tocarPegarCoracao();
                 hp+=20;
-                barraDeHP.ganhaHP(20);
+                barraDeHp.ganhaHP(20);
             }
         }
     }
@@ -208,7 +208,7 @@ public class Player extends Actor
         World world = getWorld();
         if (world != null) 
         {
-            world.removeObject(barraDeHP);
+            world.removeObject(barraDeHp);
             world.removeObject(this);
         }
     }
@@ -258,15 +258,15 @@ public class Player extends Actor
     /**
      * Método de acesso da barraDeHp
      */
-    public BarraDeHP getBarraDeHP() 
+    public BarraDeHp getBarraDeHP() 
     {
-        return barraDeHP;
+        return barraDeHp;
     }
     
     /**
      * Metodo de acesso da barraUlt
      */
-    public BarraUlt getBarraUlt()
+    public BarraDaUlt getBarraUlt()
     {
         return barraUlt;
     }
@@ -274,9 +274,9 @@ public class Player extends Actor
     /**
      * Metodo de acesso da barra de experiencia
      */
-    public BarraExperiencia getBarraExperiencia()
+    public BarraDeExperiencia getBarraExperiencia()
     {
-        return barraExperiencia;
+        return barraDeExperiencia;
     }
     
     /**
@@ -408,9 +408,10 @@ public class Player extends Actor
      */
     private void aumentarAtributos()
     {
-        if (experiencia >= barraExperiencia.getExperienciaNecessaria())
+        if (experiencia >= barraDeExperiencia.getExperienciaNecessaria())
         {
             nivelPlayer++;
+            maxHP += 10;
             BolaDeFogo.aumentarDano();
             if(nivelPlayer % 5 == 0)velocidade++;
             experiencia = 0;

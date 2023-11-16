@@ -1,0 +1,19 @@
+#BlueJ class context
+comment0.target=BarraDeHp
+comment0.text=\n\ Write\ a\ description\ of\ class\ BarraDeHpTeste\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=player\ maxHP\ larguraOriginal
+comment1.target=BarraDeHp(Player,\ int,\ int)
+comment1.text=\n\ Construtor\ da\ classe\ BarraDeHP.\n\ Inicializa\ as\ vari\u00E1veis\ referentes\ \u00E0\ barra\ e\ define\ a\ posi\u00E7\u00E3o\ inicial\ embaixo\ do\ jogador.\n
+comment2.params=
+comment2.target=void\ act()
+comment2.text=\n\ Verifica\ a\ existencia\ de\ um\ mundo\ e\ um\ player\ para\ que\ seja\ possivel\ aparecer\ a\ barra\ de\ HP\n
+comment3.params=heal
+comment3.target=void\ ganhaHP(int)
+comment3.text=\n\ M\u00E9todo\ de\ atualiza\u00E7\u00E3o\ do\ tamanho\ da\ barra.\n\ Funciona\ ajustando\ o\ tamanho\ da\ barra\ com\ base\ no\ HP\ restante.\n
+comment4.params=dano
+comment4.target=void\ perdeHP(int)
+comment4.text=\n\ M\u00E9todo\ de\ atualiza\u00E7\u00E3o\ do\ tamanho\ da\ barra.\n\ Funciona\ ajustando\ o\ tamanho\ da\ barra\ com\ base\ no\ HP\ restante.\n
+comment5.params=
+comment5.target=void\ atualizaImagem()
+comment5.text=\n\ M\u00E9todo\ de\ atualiza\u00E7\u00E3o\ da\ imagem\ da\ barra\ de\ HP.\n\ A\ barra\ de\ HP\ diminui\ apenas\ para\ o\ lado\ esquerdo.\n
+numComments=6

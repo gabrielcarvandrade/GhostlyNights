@@ -8,7 +8,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Instrucoes extends World
 {
-
     /**
      * Constructor for objects of class Instrucoes.
      * 
@@ -23,7 +22,7 @@ public class Instrucoes extends World
         voltarMenu();
     }
     
-    public void voltarMenu(){
+    private void voltarMenu(){
         if (Greenfoot.isKeyDown("backspace")){
             Greenfoot.setWorld(new StartScreen());
         }

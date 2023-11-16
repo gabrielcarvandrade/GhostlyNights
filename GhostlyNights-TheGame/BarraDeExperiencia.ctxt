@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.target=BarraDeExperiencia
+comment0.text=\n\ Write\ a\ description\ of\ class\ BarraDeExperiencia\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=larguraOriginal\ player
+comment1.target=BarraDeExperiencia(int,\ Player)
+comment1.text=\n\ Construtor\ da\ classe\ BarraDeExperiencia.\n
+comment2.params=
+comment2.target=void\ act()
+comment2.text=\n\ Verifica\ a\ existencia\ de\ um\ mundo\ e\ um\ player\ para\ que\ seja\ possivel\ aparecer\ a\ barra\ de\ experiencia\n
+comment3.params=
+comment3.target=void\ atualizaImagem()
+comment3.text=\n\ M\u00E9todo\ de\ atualiza\u00E7\u00E3o\ da\ imagem\ da\ barra\ de\ HP.\n\ A\ barra\ de\ HP\ diminui\ apenas\ para\ o\ lado\ esquerdo.\n
+comment4.params=
+comment4.target=int\ getExperienciaNecessaria()
+comment4.text=\n\ Retorna\ a\ experiencia\ necessaria\ para\ aumentar\ de\ nivel\n
+numComments=5

@@ -1,0 +1,18 @@
+#BlueJ class context
+comment0.target=BarraDaUlt
+comment0.text=\n\ Write\ a\ description\ of\ class\ BarraDaUlt\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=player\ larguraOriginal
+comment1.target=BarraDaUlt(Player,\ int)
+comment1.text=\n\ Construtor\ da\ classe\ BarraUlt.\n\ Inicializa\ as\ vari\u00E1veis\ referentes\ \u00E0\ barra\ e\ define\ a\ posi\u00E7\u00E3o\ inicial\ embaixo\ do\ jogador.\n
+comment2.params=
+comment2.target=void\ act()
+comment2.text=\n\ Verifica\ a\ existencia\ de\ um\ mundo\ e\ um\ player\ para\ que\ seja\ possivel\ aparecer\ a\ barra\ de\ Ult\n
+comment3.params=
+comment3.target=void\ lan\u00E7aUlt()
+comment3.text=\n\ M\u00E9todo\ de\ atualiza\u00E7\u00E3o\ do\ tamanho\ da\ barra.\n\ Funciona\ ajustando\ o\ tamanho\ da\ barra\ com\ base\ na\ energia\ restante.\n
+comment4.params=
+comment4.target=void\ atualizaImagem()
+comment4.text=\n\ M\u00E9todo\ de\ atualiza\u00E7\u00E3o\ da\ imagem\ da\ barra\ de\ Ult.\n\ A\ barra\ de\ HP\ diminui\ apenas\ para\ o\ lado\ esquerdo.\n
+comment5.params=
+comment5.target=int\ getMaxUlt()
+numComments=6

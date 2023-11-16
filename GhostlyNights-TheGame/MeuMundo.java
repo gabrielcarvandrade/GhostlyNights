@@ -8,12 +8,8 @@
  */
 public class MeuMundo extends World 
 {
-    private int count;
     private int cooldownSpawnFantasma;
     private int cooldownSpawnCoracao;
-    private int randomizadorAltura;
-    private int randomizadorLargura;
-    private int randomizadorSpawn;
     private int contadorDificuldade;
     private static int nivelInimigo;
     
@@ -45,7 +41,7 @@ public class MeuMundo extends World
         bolaDeFogo = new BolaDeFogo(player);
         iconeEsmeralda = new EsmeraldaDeXp();
         bordaXp = new GreenfootImage("BordaXP.png");
-        count = 0;
+        //count = 0;
         cooldownSpawnFantasma = 60;
         cooldownSpawnCoracao = 660;
         contadorDificuldade = 0;
@@ -58,16 +54,16 @@ public class MeuMundo extends World
     private void prepare() 
     {
         addObject(player, 400, 300);
-        setPaintOrder(BarraExperiencia.class, Inimigo.class);
+        setPaintOrder(BarraDeExperiencia.class, Inimigo.class);
         // Cria a barra de HP
-        BarraDeHP barraDeHP = player.getBarraDeHP();
+        BarraDeHp barraDeHP = player.getBarraDeHP();
         addObject(barraDeHP, player.getX(), player.getY() + player.getImage().getHeight() / 2 + 5);
         // Cria barra que mostra carregamento da Ult
-        BarraUlt barraUlt = player.getBarraUlt();
+        BarraDaUlt barraUlt = player.getBarraUlt();
         addObject(barraUlt, player.getX(), player.getY() + player.getImage().getHeight() + 5);
         //Cria barra de experiencia
         getBackground().drawImage(bordaXp, 75, 530+1/5);
-        BarraExperiencia barraExperiencia = player.getBarraExperiencia();
+        BarraDeExperiencia barraExperiencia = player.getBarraExperiencia();
         addObject(barraExperiencia, 400, 540);
         
         Som.tocarMusicaTema();
@@ -78,7 +74,6 @@ public class MeuMundo extends World
      */
     public void act() 
     {
-        count ++;
         if (player.isVivo()){
             spawnarFantasmas();
             if(dificuldadePequena)
@@ -112,8 +107,12 @@ public class MeuMundo extends World
     {
         if (getObjects(Inimigo.class).size() == 0)
             addObject(new Inimigo(player), 0, 0);
+        
+        int randomizadorAltura;
+        int randomizadorLargura;
+        int randomizadorSpawn;
             
-        if (count % cooldownSpawnFantasma == 0) 
+        if (player.getTempo() % cooldownSpawnFantasma == 0) 
         {
             randomizadorLargura = Greenfoot.getRandomNumber(getWidth());
             randomizadorAltura = Greenfoot.getRandomNumber(getHeight());
@@ -133,14 +132,15 @@ public class MeuMundo extends World
      */
     private void spawnarCoracoes()
     {
-       if (count % cooldownSpawnCoracao == 0) 
+        int randomizadorAltura;
+        int randomizadorLargura;
+        int randomizadorSpawn;
+        
+        if (player.getTempo() % cooldownSpawnCoracao == 0) 
         {
             randomizadorLargura = Greenfoot.getRandomNumber(getWidth());
             randomizadorAltura = Greenfoot.getRandomNumber(getHeight());
-            int ultimoCase = randomizadorSpawn;
-            randomizadorSpawn = Greenfoot.getRandomNumber(30);
-            if(randomizadorSpawn != ultimoCase)
-                addObject(new Heart(), randomizadorLargura, randomizadorAltura);
+            addObject(new Heart(), randomizadorLargura, randomizadorAltura);
         }
     }
     
@@ -153,7 +153,13 @@ public class MeuMundo extends World
         {
             Som.pararMusicaTema();
             if (Greenfoot.isKeyDown("r"))
+            {
+                Inimigo inimigo = new Inimigo(player);
+                BolaDeFogo magia = new BolaDeFogo(player);
+                inimigo.reiniciarInimigo();
+                magia.reiniciarBolaDeFogo();
                 Greenfoot.setWorld(new MeuMundo(modoAutomatico));
+            }
         }
     }
     
@@ -176,7 +182,7 @@ public class MeuMundo extends World
     /**
      * Método de acesso da classe player.
      */
-    public Player getPlayer()
+    private Player getPlayer()
     {
         return player;
     }
@@ -184,9 +190,9 @@ public class MeuMundo extends World
     /**
      * Método de aumento do atributo da velocidade de geração 
      */
-    public void aumentarVelocidadeSpawn()
+    private void aumentarVelocidadeSpawn()
     {
-        if(count % 900*Inimigo.getNivelInimigo() == 0)
+        if(player.getTempo() % 900*Inimigo.getNivelInimigo() == 0)
         {
             cooldownSpawnFantasma-=3;
             

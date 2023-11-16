@@ -7,7 +7,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class StartScreen extends World
 {
     private boolean modoAutomatico;
-    private boolean modoManual;
 
     /**
      * Construtor da classe startScreen.
@@ -48,14 +47,14 @@ public class StartScreen extends World
     /**
      * Metodo que cuida de criar o World MeuMundo e parar a musica da tela de menu
      */
-    public void startGame(){
+    private void startGame(){
         if (Greenfoot.isKeyDown("enter")){
             Greenfoot.setWorld(new MeuMundo(modoAutomatico));
             Som.pararMusicaMenu();
         }
     }
 
-    public void instrucoes(){
+    private void instrucoes(){
         if (Greenfoot.isKeyDown("i")){
             Greenfoot.setWorld(new Instrucoes());
         }
@@ -64,7 +63,7 @@ public class StartScreen extends World
     /**
      * Metodo que chama outro metodo da classe Som para aumentar ou diminuir o som do jogo
      */
-    public void regularVolume()
+    private void regularVolume()
     {
         Som.regularVolume();
     }
@@ -81,7 +80,7 @@ public class StartScreen extends World
     /**
      * Metodo que chama outro metodo da classe Som para pausar o som
      */
-    public void stopped ()
+    public void stopped()
     {
         Som.pararMusicaMenu();
     }

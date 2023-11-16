@@ -9,10 +9,11 @@ import greenfoot.*;
 public class Inimigo extends Actor 
 {
     private int vida;
-    private int dano;
-    private static int velocidade;
+    private static int maxVida = 20;
+    private static int dano = 20;
+    private static int velocidade = 1;
     private int rotacao;
-    private static int nivelInimigo;
+    private static int nivelInimigo = 1;
 
     private Player player;
     
@@ -22,10 +23,9 @@ public class Inimigo extends Actor
     public Inimigo(Player player) 
     {
         this.player = player;
-        vida = 20;
-        dano = 20;
-        velocidade = getVelocidade();
-        nivelInimigo = getNivelInimigo();
+        vida = obterMaxVida();
+        maxVida = obterMaxVida();
+        dano = obterDanoInimigo();
         setImage(new GreenfootImage("Fantasminha2.png"));
         getImage().scale(55, 55);
     }
@@ -60,9 +60,10 @@ public class Inimigo extends Actor
     {
         if (player.getTempo()/60 >= 15*nivelInimigo)
         {
-            dano+=5;
+            dano+=4;
+            maxVida+=4;
             nivelInimigo++;
-            if(nivelInimigo % 15 == 0)
+            if(nivelInimigo % 10 == 0)
             {
                 velocidade++;
             }
@@ -79,30 +80,18 @@ public class Inimigo extends Actor
     }
     
     /**
+     * Metodo que retorno a vida maxima que cada fantasma pode ter
+     */
+    private int obterMaxVida()
+    {
+        return maxVida;
+    }
+    
+    /**
      * Metodo de acesso ao dano do inimigo.
      */
     public int obterDanoInimigo(){
         return dano;
-    }
-    
-    /**
-     * Metodo de acesso ao nivel do inimigo.
-     */
-    public static int getNivelInimigo()
-    {
-        if(nivelInimigo == 0)
-        nivelInimigo = 1;
-        return nivelInimigo;
-    }
-    
-    /**
-     * Metodo de acesso da velocidade do fantasma
-     */
-    public static int getVelocidade()
-    {
-        if(velocidade == 0)
-        velocidade = 1;
-        return velocidade;
     }
     
     /**
@@ -111,5 +100,23 @@ public class Inimigo extends Actor
     public void alterarVida(int dano)
     {
         vida -= dano;
+    }
+    
+    /**
+     * Metodo de acesso o nivel do inimgo
+     */
+    public static int getNivelInimigo()
+    {
+        return nivelInimigo;
+    }
+    
+    /**
+     * Metodo para reiniciar os atributos do inimigo
+     */
+    public void reiniciarInimigo()
+    {
+        nivelInimigo = 1;
+        maxVida = 20;
+        dano = 20;
     }
 }

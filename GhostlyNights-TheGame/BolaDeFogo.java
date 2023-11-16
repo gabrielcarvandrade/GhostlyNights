@@ -15,7 +15,6 @@ public class BolaDeFogo extends Actor
     
     private GreenfootImage imagem;
     private Player player;
-    private BarraUlt barraUlt;
 
     
     /**
@@ -27,7 +26,6 @@ public class BolaDeFogo extends Actor
     public BolaDeFogo(Player player)
     {
         this.player = player;
-        barraUlt = new BarraUlt(player);
         velocidade = 5;
         dano = getDano();
         volume = 40;
@@ -91,6 +89,14 @@ public class BolaDeFogo extends Actor
      */
     public static void aumentarDano()
     {
-        dano += 2;
+        dano += 3;
+    }
+    
+    /**
+     * Metodo para reiniciar o dano da bola de fogo
+     */
+    public void reiniciarBolaDeFogo()
+    {
+        dano = 10;
     }
 }
