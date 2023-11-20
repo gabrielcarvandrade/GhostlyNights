@@ -12,7 +12,6 @@ public class Inimigo extends Actor
     private static int maxVida = 20;
     private static int dano = 20;
     private static int velocidade = 1;
-    private int rotacao;
     private static int nivelInimigo = 1;
 
     private Player player;

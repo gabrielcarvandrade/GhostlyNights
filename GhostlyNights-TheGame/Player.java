@@ -56,7 +56,7 @@ public class Player extends Actor
         
         this.modoAutomatico = modoAutomatico;
         // Cria a barra de HP
-        barraDeHp = new BarraDeHp(this, hp, 40);
+        barraDeHp = new BarraDeHp(this, maxHP, 40);
         // Cria barra que mostra carregamento da Ult
         barraUlt = new BarraDaUlt(this, 40);
         // Cria barra de experiencia
@@ -152,7 +152,7 @@ public class Player extends Actor
             if (inimigo != null) 
             {
                 hp -= inimigo.obterDanoInimigo();
-                barraDeHp.perdeHP(20); // Atualiza a barra de HP
+                barraDeHp.perdeHP(inimigo.obterDanoInimigo());
                 tempoColisao = 30;
 
                 if (hp <= 0) 
@@ -318,7 +318,7 @@ public class Player extends Actor
     private void lançaMagiaAutomatico()
     {
         World mundo = getWorld();
-        BolaDeFogo bolaDeFogo = new BolaDeFogo(this);
+        BolaDeFogo bolaDeFogo = new BolaDeFogo(this, 4, 40);
         if(Inimigo.class!=null)
         {
             if (tempo % 30 == 0)
@@ -343,12 +343,12 @@ public class Player extends Actor
                 if (Greenfoot.isKeyDown("SPACE")) 
                 {
                     World mundo = getWorld();
-                    UltBolaDeFogo ultBolaDeFogo = new UltBolaDeFogo(this);
-                    mundo.addObject(ultBolaDeFogo, getX(), getY());
+                    Ult ult = new Ult(this, 5, 40);
+                    mundo.addObject(ult, getX(), getY());
                     Som.tocarSomBolaDeFogo();
                     if (inimigoProximo != null)
                     {
-                        ultBolaDeFogo.turnTowards(inimigoProximo.getX(), inimigoProximo.getY()); // faz a bola ir em direçao ao primeiro inimigo detectado pelo metodo getNeighbours 
+                        ult.turnTowards(inimigoProximo.getX(), inimigoProximo.getY()); // faz a bola ir em direçao ao primeiro inimigo detectado pelo metodo getNeighbours 
                     }
                     pontosUlt -= 20;
                 }
@@ -363,7 +363,7 @@ public class Player extends Actor
     private void lançaMagiaManual()
     {
         World mundo = getWorld();
-        BolaDeFogo bolaDeFogo = new BolaDeFogo(this);
+        BolaDeFogo bolaDeFogo = new BolaDeFogo(this, 4, 40);
         MouseInfo mouse = Greenfoot.getMouseInfo();
             if(mouse != null)
             {
@@ -389,12 +389,12 @@ public class Player extends Actor
             {
                 World mundo = getWorld();
                 MouseInfo mouse = Greenfoot.getMouseInfo();
-                UltBolaDeFogo ultBolaDeFogo = new UltBolaDeFogo(this);
+                Ult ult = new Ult(this, 5, 40);
                 turnTowards(mouse.getX(), mouse.getY());
                 Som.tocarSomBolaDeFogo();
-                ultBolaDeFogo.setRotation(getRotation());
+                ult.setRotation(getRotation());
                 setRotation(0);
-                mundo.addObject(ultBolaDeFogo, getX(), getY());
+                mundo.addObject(ult, getX(), getY());
                     
                 pontosUlt -= 20;
             }

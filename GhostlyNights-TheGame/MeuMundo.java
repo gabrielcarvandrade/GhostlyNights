@@ -11,7 +11,6 @@ public class MeuMundo extends World
     private int cooldownSpawnFantasma;
     private int cooldownSpawnCoracao;
     private int contadorDificuldade;
-    private static int nivelInimigo;
     
     private boolean modoAutomatico;
     private boolean dificuldadePequena;
@@ -22,9 +21,7 @@ public class MeuMundo extends World
     private World world;
     private BolaDeFogo bolaDeFogo;
     private EsmeraldaDeXp iconeEsmeralda;
-    private GreenfootImage bordaXp;
     private Player player;
-    private ObjetosExternos objetosExternos;
     
     /**
      * Construtor da classe MeuMundo
@@ -36,12 +33,9 @@ public class MeuMundo extends World
         dificuldadePequena = false;
         dificuldadeMedia = false;
         dificuldadeMax = false;
-        nivelInimigo = 1;
         player = new Player(modoAutomatico);
-        bolaDeFogo = new BolaDeFogo(player);
+        bolaDeFogo = new BolaDeFogo(player, 3, 40);
         iconeEsmeralda = new EsmeraldaDeXp();
-        bordaXp = new GreenfootImage("BordaXP.png");
-        //count = 0;
         cooldownSpawnFantasma = 60;
         cooldownSpawnCoracao = 660;
         contadorDificuldade = 0;
@@ -56,15 +50,11 @@ public class MeuMundo extends World
         addObject(player, 400, 300);
         setPaintOrder(BarraDeExperiencia.class, Inimigo.class);
         // Cria a barra de HP
-        BarraDeHp barraDeHP = player.getBarraDeHP();
-        addObject(barraDeHP, player.getX(), player.getY() + player.getImage().getHeight() / 2 + 5);
+        addObject(player.getBarraDeHP(), player.getX(), player.getY() + player.getImage().getHeight() / 2 + 5);
         // Cria barra que mostra carregamento da Ult
-        BarraDaUlt barraUlt = player.getBarraUlt();
-        addObject(barraUlt, player.getX(), player.getY() + player.getImage().getHeight() + 5);
+        addObject(player.getBarraUlt(), player.getX(), player.getY() + player.getImage().getHeight() + 5);
         //Cria barra de experiencia
-        getBackground().drawImage(bordaXp, 75, 530+1/5);
-        BarraDeExperiencia barraExperiencia = player.getBarraExperiencia();
-        addObject(barraExperiencia, 400, 540);
+        addObject(player.getBarraExperiencia(), 400, 540);
         
         Som.tocarMusicaTema();
     }
@@ -155,7 +145,7 @@ public class MeuMundo extends World
             if (Greenfoot.isKeyDown("r"))
             {
                 Inimigo inimigo = new Inimigo(player);
-                BolaDeFogo magia = new BolaDeFogo(player);
+                BolaDeFogo magia = new BolaDeFogo(player, 3, 40);
                 inimigo.reiniciarInimigo();
                 magia.reiniciarBolaDeFogo();
                 Greenfoot.setWorld(new MeuMundo(modoAutomatico));
@@ -180,31 +170,25 @@ public class MeuMundo extends World
     }
     
     /**
-     * Método de acesso da classe player.
-     */
-    private Player getPlayer()
-    {
-        return player;
-    }
-    
-    /**
      * Método de aumento do atributo da velocidade de geração 
      */
     private void aumentarVelocidadeSpawn()
     {
-        if(player.getTempo() % 900*Inimigo.getNivelInimigo() == 0)
+        if(player.getTempo() % 500*Inimigo.getNivelInimigo() == 0)
         {
             cooldownSpawnFantasma-=3;
             
-            contadorDificuldade++;
+            contadorDificuldade += 3;
             if(contadorDificuldade == 20)
             {
                 dificuldadePequena = true;
             } else if(contadorDificuldade == 35)
             {
+                dificuldadePequena = false;
                 dificuldadeMedia = true;
             } else if(contadorDificuldade == 50)
             {
+                dificuldadeMedia = false;
                 dificuldadeMax = true;
             }
         }

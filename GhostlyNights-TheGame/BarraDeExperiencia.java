@@ -13,6 +13,7 @@ public class BarraDeExperiencia extends Barra
     
     private GreenfootImage barra;
     private GreenfootImage esmeralda;
+    private GreenfootImage bordaXp;
     
     /**
      * Construtor da classe BarraDeExperiencia.
@@ -22,6 +23,7 @@ public class BarraDeExperiencia extends Barra
         super(larguraOriginal, player);
         experienciaNecessaria = 15*player.getNivelPlayer();
         experiencia = player.getExperiencia();
+        bordaXp = new GreenfootImage("BordaXP.png");
         barra = new GreenfootImage(larguraOriginal, 12);
         atualizaImagem();
     }
@@ -30,6 +32,7 @@ public class BarraDeExperiencia extends Barra
      * Verifica a existencia de um mundo e um player para que seja possivel aparecer a barra de experiencia
      */
     public void act() {
+        getWorld().getBackground().drawImage(bordaXp, 75, 530+1/5);
         if (getPlayer() == null && getWorld() == null) 
             // Se o jogador não estiver mais no mundo, remove a barra de HP
             getWorld().removeObject(this);

@@ -32,7 +32,7 @@ public class BarraDaUlt extends Barra
      */
     public void act() 
     {
-        if (getPlayer() != null && getPlayer().getWorld() != null) 
+        if (getPlayer() != null && getWorld() != null) 
             // Atualiza a posição da barra para corresponder à do jogador
             setLocation(getPlayer().getX(), getPlayer().getY() + getPlayer().getImage().getHeight() + 5);
         else

@@ -20,7 +20,7 @@ public class BarraDeHp extends Barra
     {
         super(larguraOriginal,player);
         this.maxHP = maxHP;
-        this.hp = maxHP;
+        hp = maxHP;
         barra = new GreenfootImage(larguraOriginal, 10);
         atualizaImagem();
     }
@@ -30,7 +30,7 @@ public class BarraDeHp extends Barra
      */
     public void act() 
     {
-        if (getPlayer() != null && getPlayer().getWorld() != null) 
+        if (getPlayer() != null && getWorld() != null) 
         {
             // Atualiza a posição da barra para corresponder à do jogador
             setLocation(getPlayer().getX(), getPlayer().getY() + getPlayer().getImage().getHeight() / 2 + 5);
@@ -39,6 +39,7 @@ public class BarraDeHp extends Barra
             // Se o jogador não estiver mais no mundo, remove a barra de HP
             getWorld().removeObject(this);
         }
+        atualizaImagem();
     }
     
     /**
@@ -70,7 +71,7 @@ public class BarraDeHp extends Barra
      * Método de atualização da imagem da barra de HP.
      * A barra de HP diminui apenas para o lado esquerdo.
      */
-    private void atualizaImagem() 
+    public void atualizaImagem() 
     {
         barra.clear();
         int largura = getLarguraOriginal();
