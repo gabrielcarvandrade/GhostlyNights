@@ -11,6 +11,8 @@ public class MeuMundo extends World
     private int cooldownSpawnFantasma;
     private int cooldownSpawnCoracao;
     private int contadorDificuldade;
+    private long tempoInicial;
+    private long tempoFinal;
     
     private boolean modoAutomatico;
     private boolean dificuldadePequena;
@@ -39,6 +41,8 @@ public class MeuMundo extends World
         cooldownSpawnFantasma = 60;
         cooldownSpawnCoracao = 660;
         contadorDificuldade = 0;
+        tempoInicial = 0;
+        tempoFinal = 0;
         prepare();
     }
     
@@ -81,12 +85,13 @@ public class MeuMundo extends World
             }
             spawnarCoracoes();
             Som.regularVolume();
-            
             aumentarVelocidadeSpawn();
+            tempoFinal++;
         }
         else {
             mostrarPontuaçao();
         }
+        mostrarPlacar();
         restartGame();
     }
     
@@ -131,6 +136,18 @@ public class MeuMundo extends World
             randomizadorLargura = Greenfoot.getRandomNumber(getWidth());
             randomizadorAltura = Greenfoot.getRandomNumber(getHeight());
             addObject(new Heart(), randomizadorLargura, randomizadorAltura);
+        }
+    }
+    
+    /**
+     * Metodo responsavel pela geracao do placar.
+     */
+    public void mostrarPlacar()
+    {
+        if(Greenfoot.isKeyDown("p"))
+        {
+            long tempoSobrevivido = (tempoFinal - tempoInicial)/60;
+            Greenfoot.setWorld(new Placar(StartScreen.getNomePlayer(), tempoSobrevivido));
         }
     }
     
@@ -218,7 +235,8 @@ public class MeuMundo extends World
         
         showText("- Voce sobreviveu por " + (player.getTempo()/60) + " segundos" + "\n" 
             +"- Voce matou "+ player.getInimigosMortos() + " inimigos" + "\n" + "- Nivel do Player: " + player.getNivelPlayer() + "\n"
-            + "- Nivel Inimigo: "+ Inimigo.getNivelInimigo() + "\n" + "Aperte R para recomeçar!", 400, 300);
+            + "- Nivel Inimigo: "+ Inimigo.getNivelInimigo() + "\n" + "Aperte R para recomeçar!" + "\n" + "Ou aperte P para ver o placar!"
+                , 400, 300);
     }
 }
     

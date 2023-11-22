@@ -8,7 +8,7 @@ import java.util.ArrayList;
  */
 public class Player extends Actor 
 {
-    private int tempo;
+    private long tempo;
     private int hp;
     private int maxHP;
     private int velocidade;
@@ -209,6 +209,7 @@ public class Player extends Actor
         if (world != null) 
         {
             world.removeObject(barraDeHp);
+            world.removeObject(barraUlt);
             world.removeObject(this);
         }
     }
@@ -234,7 +235,7 @@ public class Player extends Actor
     /**
      * Metodo de acesso do atributo tempo
      */
-    public int getTempo() 
+    public long getTempo() 
     {
         return tempo;
     }

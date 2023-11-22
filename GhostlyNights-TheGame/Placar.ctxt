@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.target=Placar
+comment0.text=\n\ Write\ a\ description\ of\ class\ Placar\ here.\n\ \n\ @author\ (your\ name)\n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=nomePlayer\ tempoSobrevivido
+comment1.target=Placar(java.lang.String,\ java.lang.Long)
+comment1.text=\n\ Constructor\ for\ objects\ of\ class\ Placar.\n\ \n
+comment2.params=
+comment2.target=void\ act()
+comment2.text=\n\ M\u00E9todo\ respons\u00E1vel\ por\ cuidar\ do\ que\ deve\ acontecer\ enquanto\ o\ placar\ estiver\ rodando.\n
+comment3.params=
+comment3.target=void\ mostrarPlacar()
+comment3.text=\n\ M\u00E9todo\ respons\u00E1vel\ por\ mostrar\ o\ placar.\n
+comment4.params=
+comment4.target=void\ restartGame()
+comment4.text=\n\ M\u00E9todo\ respons\u00E1vel\ por\ reiniciar\ o\ jogo.\n
+numComments=5

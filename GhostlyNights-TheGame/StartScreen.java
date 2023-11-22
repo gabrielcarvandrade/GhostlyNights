@@ -7,6 +7,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class StartScreen extends World
 {
     private boolean modoAutomatico;
+    
+    private static String nomePlayer;
 
     /**
      * Construtor da classe startScreen.
@@ -50,6 +52,7 @@ public class StartScreen extends World
     private void startGame(){
         if (Greenfoot.isKeyDown("enter")){
             Greenfoot.setWorld(new MeuMundo(modoAutomatico));
+            nomePlayer = Greenfoot.ask("Digite um nome para seu player");
             Som.pararMusicaMenu();
         }
     }
@@ -83,5 +86,13 @@ public class StartScreen extends World
     public void stopped()
     {
         Som.pararMusicaMenu();
+    }
+
+    /**
+     * Metodo que retorna o nome do player
+     */
+    public static String getNomePlayer()
+    {
+        return nomePlayer;
     }
 }
