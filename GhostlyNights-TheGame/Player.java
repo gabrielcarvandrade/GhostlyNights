@@ -8,15 +8,17 @@ import java.util.ArrayList;
  */
 public class Player extends Actor 
 {
-    private long tempo;
+    private int tempo;
     private int hp;
     private int maxHP;
     private int velocidade;
     private int tempoColisao;
     private int inimigosMortos;
     private int pontosUlt;
+    private int maxUlt;
     private int nivelPlayer;
     private int experiencia;
+    private static int experienciaNecessaria;
     
     private GreenfootImage[] image;
     private BarraDeHp barraDeHp;
@@ -36,10 +38,11 @@ public class Player extends Actor
     public Player(boolean modoAutomatico) 
     {
         inimigosMortos = 0;
-        experiencia = inimigosMortos;
         pontosUlt = 0;
+        maxUlt = 20;
         tempo = 0;
         nivelPlayer = 1;
+        experienciaNecessaria = 15*nivelPlayer;
         hp = 100;
         maxHP = 100;
         velocidade = 3;
@@ -152,7 +155,6 @@ public class Player extends Actor
             if (inimigo != null) 
             {
                 hp -= inimigo.obterDanoInimigo();
-                barraDeHp.perdeHP(inimigo.obterDanoInimigo());
                 tempoColisao = 30;
 
                 if (hp <= 0) 
@@ -181,7 +183,6 @@ public class Player extends Actor
                 removeTouching(Heart.class);
                 Som.tocarPegarCoracao();
                 hp+=20;
-                barraDeHp.ganhaHP(20);
             }
         }
     }
@@ -209,6 +210,7 @@ public class Player extends Actor
         if (world != null) 
         {
             world.removeObject(barraDeHp);
+            world.removeObject(barraDeExperiencia);
             world.removeObject(barraUlt);
             world.removeObject(this);
         }
@@ -223,19 +225,27 @@ public class Player extends Actor
     }
     
     /**
+     * Metodo de acesso ao hp maximo do player
+     */
+    public int getMaxHp()
+    {
+        return maxHP;
+    }
+    
+    /**
      * Altera os atributos inimigosMortos e pontosUlt da classe player quando um inimigo morre
      */
     public void alterarAtributos()
     {
         addInimigosMortos();
-        if(getPontosUlt() < barraUlt.getMaxUlt())
+        if(getPontosUlt() < maxUlt)
             addPontosUlt();
     }
     
     /**
      * Metodo de acesso do atributo tempo
      */
-    public long getTempo() 
+    public int getTempo() 
     {
         return tempo;
     }
@@ -352,9 +362,12 @@ public class Player extends Actor
                         ult.turnTowards(inimigoProximo.getX(), inimigoProximo.getY()); // faz a bola ir em direçao ao primeiro inimigo detectado pelo metodo getNeighbours 
                     }
                     pontosUlt -= 20;
+                    if (pontosUlt < 0)
+                    {
+                        pontosUlt = 0;
+                    }
                 }
             }
-            barraUlt.lançaUlt();
         }
     }
 
@@ -397,9 +410,11 @@ public class Player extends Actor
                 setRotation(0);
                 mundo.addObject(ult, getX(), getY());
                     
-                pontosUlt -= 20;
+                if (pontosUlt < 0)
+                    {
+                        pontosUlt = 0;
+                    }
             }
-            barraUlt.lançaUlt();
         }
     }
     
@@ -409,7 +424,7 @@ public class Player extends Actor
      */
     private void aumentarAtributos()
     {
-        if (experiencia >= barraDeExperiencia.getExperienciaNecessaria())
+        if (experiencia >= experienciaNecessaria)
         {
             nivelPlayer++;
             maxHP += 10;
@@ -436,11 +451,19 @@ public class Player extends Actor
     }
     
     /**
-     * Metodo de acesso a quantidade de pontos para lançar o especial
+     * Metodo de acesso a quantidade atual de pontos ult
      */
     public int getPontosUlt()
     {
         return pontosUlt;
+    }
+
+    /**
+     * Método de acesso a quantidade de pontos da ult para lançar o especial
+     */
+    public int getMaxUlt()
+    {
+        return maxUlt;
     }
     
     /**
@@ -457,5 +480,13 @@ public class Player extends Actor
     public int getExperiencia()
     {
         return experiencia;
+    }
+
+    /**
+     * Método de acesso a quantidade de pontos de experiencia necessarios para subir de nivel
+     */
+    public int getExperienciaNecessaria()
+    {
+        return experienciaNecessaria;
     }
 }

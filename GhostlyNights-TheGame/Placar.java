@@ -10,18 +10,21 @@ public class Placar extends World
 {
     private String unidadeDeTempo;
     
-    GreenfootImage imagemPlacar;
-    MeuMundo mundo;
-    TreeMap<String, Long> placarOrdenado;
+    private boolean modoAutomatico;
+    
+    private GreenfootImage imagemPlacar;
+    private MeuMundo mundo;
+    private TreeMap<String, Long> placarOrdenado;
 
     /**
      * Constructor for objects of class Placar.
      * 
      */
-    public Placar(String nomePlayer, Long tempoSobrevivido) 
+    public Placar(String nomePlayer, Long tempoSobrevivido, boolean modoAutomatico) 
     {
         super(800, 600, 1);
-        mundo = new MeuMundo(true);
+        mundo = new MeuMundo(modoAutomatico);
+        this.modoAutomatico = modoAutomatico;
         placarOrdenado = new TreeMap<>();
         imagemPlacar = new GreenfootImage("placar.png");
         setBackground(imagemPlacar);
@@ -65,17 +68,25 @@ public class Placar extends World
     
             posicao++;
         }
+        
+        showText("Aperte R para voltar à sua aventura.", 400, 50);
     }
 
 
     /**
-     * Método responsável por reiniciar o jogo.
+     * Método responsável pela função de reiniciar o jogo.
      */
     private void restartGame()
     {
+        Som.pararMusicaTema();
         if (Greenfoot.isKeyDown("r"))
         {
-            Greenfoot.setWorld(new MeuMundo(true));
+            Player player = new Player(modoAutomatico);
+            Inimigo inimigo = new Inimigo(player);
+            BolaDeFogo magia = new BolaDeFogo(player, 3, 40);
+            inimigo.reiniciarInimigo();
+            magia.reiniciarBolaDeFogo();
+            Greenfoot.setWorld(new MeuMundo(modoAutomatico));
         }
     }
 }

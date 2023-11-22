@@ -9,8 +9,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class BarraDeHp extends Barra
 {
     private GreenfootImage barra;
-    private int maxHP;
-    private int hp;
 
     /**
      * Construtor da classe BarraDeHP.
@@ -19,8 +17,6 @@ public class BarraDeHp extends Barra
     public BarraDeHp(Player player, int maxHP, int larguraOriginal) 
     {
         super(larguraOriginal,player);
-        this.maxHP = maxHP;
-        hp = maxHP;
         barra = new GreenfootImage(larguraOriginal, 10);
         atualizaImagem();
     }
@@ -41,31 +37,6 @@ public class BarraDeHp extends Barra
         }
         atualizaImagem();
     }
-    
-    /**
-     * Método de atualização do tamanho da barra.
-     * Funciona ajustando o tamanho da barra com base no HP restante.
-     */
-    public void ganhaHP(int heal) 
-    {
-        hp+=20;
-        atualizaImagem();
-    }
-
-    /**
-     * Método de atualização do tamanho da barra.
-     * Funciona ajustando o tamanho da barra com base no HP restante.
-     */
-    public void perdeHP(int dano) 
-    {
-        if (dano > 0) 
-        {
-            hp -= dano;
-            if (hp < 0) 
-                hp = 0;
-            atualizaImagem();
-        }
-    }
 
     /**
      * Método de atualização da imagem da barra de HP.
@@ -75,26 +46,26 @@ public class BarraDeHp extends Barra
     {
         barra.clear();
         int largura = getLarguraOriginal();
-        if (hp > 0) 
+        if (getPlayer().getHP() > 0) 
         {
             // Calcula a nova largura da barra baseada no HP restante
-            int novaLargura = (hp * getLarguraOriginal()) / maxHP;
+            int novaLargura = (getPlayer().getHP() * getLarguraOriginal()) / getPlayer().getMaxHp();
             barra.setColor(Color.GREEN);
             barra.fillRect(0, 0, novaLargura, 10);
             largura = novaLargura;
         }
         
-        if (hp > 0 && hp <=maxHP/10*2) 
+        if (getPlayer().getHP() > 0 && getPlayer().getHP() <=getPlayer().getMaxHp()/10*2) 
         {
             // Calcula a nova largura da barra baseada no HP restante
-            int novaLargura = (hp * getLarguraOriginal()) / maxHP;
+            int novaLargura = (getPlayer().getHP() * getLarguraOriginal()) / getPlayer().getMaxHp();
             barra.setColor(Color.RED);
             barra.fillRect(0, 0, novaLargura, 10);
         } 
-        else if (hp > maxHP/10*2 && hp <= maxHP/10*6) 
+        else if (getPlayer().getHP() > getPlayer().getMaxHp()/10*2 && getPlayer().getHP() <= getPlayer().getMaxHp()/10*6) 
         {
             // Calcula a nova largura da barra baseada no HP restante
-            int novaLargura = (hp * getLarguraOriginal()) / maxHP;
+            int novaLargura = (getPlayer().getHP() * getLarguraOriginal()) / getPlayer().getMaxHp();
             barra.setColor(Color.YELLOW);
             barra.fillRect(0, 0, novaLargura, 10);
         }

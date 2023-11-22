@@ -13,6 +13,8 @@ public class MeuMundo extends World
     private int contadorDificuldade;
     private long tempoInicial;
     private long tempoFinal;
+
+    private String nomePlayer;
     
     private boolean modoAutomatico;
     private boolean dificuldadePequena;
@@ -60,6 +62,8 @@ public class MeuMundo extends World
         //Cria barra de experiencia
         addObject(player.getBarraExperiencia(), 400, 540);
         
+         nomePlayer = Greenfoot.ask("Digite um nome para seu player");
+        
         Som.tocarMusicaTema();
     }
     
@@ -70,7 +74,24 @@ public class MeuMundo extends World
     {
         if (player.isVivo()){
             spawnarFantasmas();
-            if(dificuldadePequena)
+            showText("Nivel do Inimigo: " + Inimigo.getNivelInimigo(), 120, 30);
+            verificaDificuldade();
+            spawnarCoracoes();
+            Som.regularVolume();
+            aumentarVelocidadeSpawn();
+            tempoFinal++;
+        }
+        else {
+            mostrarPlacar();
+        }
+    }
+    
+    /**
+     * Metodo para aumentar a dificuldade do jogo
+     */
+    private void verificaDificuldade()
+    {
+        if(dificuldadePequena)
             {
                spawnarFantasmas();
             } else if(dificuldadeMedia)
@@ -83,16 +104,6 @@ public class MeuMundo extends World
                spawnarFantasmas();
                spawnarFantasmas();
             }
-            spawnarCoracoes();
-            Som.regularVolume();
-            aumentarVelocidadeSpawn();
-            tempoFinal++;
-        }
-        else {
-            mostrarPontuaçao();
-        }
-        mostrarPlacar();
-        restartGame();
     }
     
     /**
@@ -144,11 +155,8 @@ public class MeuMundo extends World
      */
     public void mostrarPlacar()
     {
-        if(Greenfoot.isKeyDown("p"))
-        {
-            long tempoSobrevivido = (tempoFinal - tempoInicial)/60;
-            Greenfoot.setWorld(new Placar(StartScreen.getNomePlayer(), tempoSobrevivido));
-        }
+        long tempoSobrevivido = (tempoFinal - tempoInicial)/60;
+        Greenfoot.setWorld(new Placar(nomePlayer, tempoSobrevivido, modoAutomatico));
     }
     
     /**
@@ -209,34 +217,6 @@ public class MeuMundo extends World
                 dificuldadeMax = true;
             }
         }
-    }
-    
-    /**
-     * Método responsável por exibir a mensagem pós fim de jogo, demonstrando vários atributos de pontuação do jogador.
-     */
-    private void mostrarPontuaçao()
-    {
-        int largura = 350;
-        int altura = 350;
-        
-        int x = (getWidth() - largura) / 2;
-        int y = (getHeight() - altura) / 2;
-        
-        GreenfootImage fundoPontuacao = new GreenfootImage(largura, altura);
-        fundoPontuacao.setColor(Color.WHITE);
-        fundoPontuacao.fillRect(0, 0, largura, altura);
-        
-        GreenfootImage textoPerdeu = getBackground();
-        textoPerdeu.drawImage(fundoPontuacao, x, y);
-        Font fontePerdeu = new Font(true, true, 50);
-        textoPerdeu.setFont(fontePerdeu);
-        textoPerdeu.setColor(Color.RED);
-        textoPerdeu.drawString("Você perdeu! ", 240, 200);
-        
-        showText("- Voce sobreviveu por " + (player.getTempo()/60) + " segundos" + "\n" 
-            +"- Voce matou "+ player.getInimigosMortos() + " inimigos" + "\n" + "- Nivel do Player: " + player.getNivelPlayer() + "\n"
-            + "- Nivel Inimigo: "+ Inimigo.getNivelInimigo() + "\n" + "Aperte R para recomeçar!" + "\n" + "Ou aperte P para ver o placar!"
-                , 400, 300);
     }
 }
     
