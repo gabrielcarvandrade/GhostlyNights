@@ -138,19 +138,11 @@ public class Placar extends World
            nomeOrdenado[l]  = nomes[l];
            tempoOrdenado[l] = tempos[l];
         }
-        
-        /*
-        placarOrdenado.clear();
-        for (int l = 0; l < nomes.length; l++)
-        {
-            placarOrdenado.put(nomes[l], tempos[l]);
-        }
-        */
     }
     
     public void setPlayerInfo(String nomePlayer, long tempoSobrevivido)
     {
-        if(nomePlayer == null)
+        if(nomePlayer.length() <=1)
         nomePlayer = "default";
         placarOrdenado.put(nomePlayer, tempoSobrevivido);
     }
