@@ -7,6 +7,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class StartScreen extends World
 {
     private boolean modoAutomatico;
+    private String nomePlayer;
+    private Placar placar;
     
 
     /**
@@ -16,6 +18,7 @@ public class StartScreen extends World
     public StartScreen()
     {    
         super(800, 600, 1);
+        placar = new Placar();
         modoAutomatico = true;
     }
 
@@ -50,7 +53,7 @@ public class StartScreen extends World
      */
     private void startGame(){
         if (Greenfoot.isKeyDown("enter")){
-            Greenfoot.setWorld(new MeuMundo(modoAutomatico));
+            Greenfoot.setWorld(new MeuMundo(modoAutomatico, placar));
             Som.pararMusicaMenu();
         }
     }

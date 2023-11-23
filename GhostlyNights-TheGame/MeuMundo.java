@@ -26,14 +26,17 @@ public class MeuMundo extends World
     private BolaDeFogo bolaDeFogo;
     private EsmeraldaDeXp iconeEsmeralda;
     private Player player;
+    private Placar placar;
     
     /**
      * Construtor da classe MeuMundo
      */
-    public MeuMundo(boolean modoAutomatico) 
+    public MeuMundo(boolean modoAutomatico, Placar placar) 
     {
         super(800, 600, 1);
+        nomePlayer = Greenfoot.ask("Digite um nome para seu player");
         this.modoAutomatico = modoAutomatico;
+        this.placar = placar;
         dificuldadePequena = false;
         dificuldadeMedia = false;
         dificuldadeMax = false;
@@ -62,7 +65,6 @@ public class MeuMundo extends World
         //Cria barra de experiencia
         addObject(player.getBarraExperiencia(), 400, 540);
         
-         nomePlayer = Greenfoot.ask("Digite um nome para seu player");
         
         Som.tocarMusicaTema();
     }
@@ -156,26 +158,7 @@ public class MeuMundo extends World
     public void mostrarPlacar()
     {
         long tempoSobrevivido = (tempoFinal - tempoInicial)/60;
-        Greenfoot.setWorld(new Placar(nomePlayer, tempoSobrevivido, modoAutomatico));
-    }
-    
-    /**
-     * Método responsável pela função de reiniciar o jogo.
-     */
-    private void restartGame()
-    {
-        if (!player.isVivo()) 
-        {
-            Som.pararMusicaTema();
-            if (Greenfoot.isKeyDown("r"))
-            {
-                Inimigo inimigo = new Inimigo(player);
-                BolaDeFogo magia = new BolaDeFogo(player, 3, 40);
-                inimigo.reiniciarInimigo();
-                magia.reiniciarBolaDeFogo();
-                Greenfoot.setWorld(new MeuMundo(modoAutomatico));
-            }
-        }
+        Greenfoot.setWorld(placar);
     }
     
     /**
@@ -217,6 +200,14 @@ public class MeuMundo extends World
                 dificuldadeMax = true;
             }
         }
+    }
+    
+    /**
+     * Metodo para passar os dados do player para a classe Placar
+     */
+    public void dadosPlayer()
+    {
+        
     }
 }
     

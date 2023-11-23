@@ -13,22 +13,20 @@ public class Placar extends World
     private boolean modoAutomatico;
     
     private GreenfootImage imagemPlacar;
-    private MeuMundo mundo;
     private TreeMap<String, Long> placarOrdenado;
 
     /**
      * Constructor for objects of class Placar.
      * 
      */
-    public Placar(String nomePlayer, Long tempoSobrevivido, boolean modoAutomatico) 
+    public Placar() 
     {
         super(800, 600, 1);
-        mundo = new MeuMundo(modoAutomatico);
         this.modoAutomatico = modoAutomatico;
         placarOrdenado = new TreeMap<>();
         imagemPlacar = new GreenfootImage("placar.png");
         setBackground(imagemPlacar);
-        placarOrdenado.put(nomePlayer, tempoSobrevivido);
+        //placarOrdenado.put(nomePlayer, tempoSobrevivido);
         mostrarPlacar();
     }
 
@@ -86,7 +84,7 @@ public class Placar extends World
             BolaDeFogo magia = new BolaDeFogo(player, 3, 40);
             inimigo.reiniciarInimigo();
             magia.reiniciarBolaDeFogo();
-            Greenfoot.setWorld(new MeuMundo(modoAutomatico));
+            Greenfoot.setWorld(new MeuMundo(modoAutomatico, this));
         }
     }
 }
