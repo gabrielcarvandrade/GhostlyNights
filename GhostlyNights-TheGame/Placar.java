@@ -15,7 +15,7 @@ public class Placar extends World
     private boolean naoMostrou;
     
     private GreenfootImage imagemPlacar;
-    private HashMap<String, Long> placarOrdenado;
+    private HashMap<String, Long> placarDesordenado;
     private String[] nomeOrdenado;
     private long[] tempoOrdenado;
 
@@ -28,7 +28,7 @@ public class Placar extends World
         super(800, 600, 1);
         this.modoAutomatico = modoAutomatico;
         naoMostrou = false;
-        placarOrdenado = new HashMap<>();
+        placarDesordenado = new HashMap<>();
         imagemPlacar = new GreenfootImage("placar.png");
         setBackground(imagemPlacar);
     }
@@ -105,13 +105,13 @@ public class Placar extends World
 
     private void ordenarPlacar()
     {
-        String[] nomes = new String[placarOrdenado.size()];
-        long[] tempos = new long[placarOrdenado.size()];
+        String[] nomes = new String[placarDesordenado.size()];
+        long[] tempos = new long[placarDesordenado.size()];
         int i = 0;
-        for (String nome : placarOrdenado.keySet())
+        for (String nome : placarDesordenado.keySet())
         {
             nomes[i] = nome;
-            tempos[i] = placarOrdenado.get(nome);
+            tempos[i] = placarDesordenado.get(nome);
             i++;
         }
         for (int j = 0; j < tempos.length; j++)
@@ -144,7 +144,7 @@ public class Placar extends World
     {
         if(nomePlayer.length() <=1 || nomePlayer.length()>8)
         nomePlayer = "default";
-        placarOrdenado.put(nomePlayer, tempoSobrevivido);
+        placarDesordenado.put(nomePlayer, tempoSobrevivido);
     }
     
     public void mudarNaoMostrou()
