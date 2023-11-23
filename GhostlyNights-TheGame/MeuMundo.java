@@ -35,7 +35,6 @@ public class MeuMundo extends World
     {
         super(800, 600, 1);
         nomePlayer = Greenfoot.ask("Digite um nome para seu player");
-        System.out.println(nomePlayer);
         this.modoAutomatico = modoAutomatico;
         this.placar = placar;
         dificuldadePequena = false;

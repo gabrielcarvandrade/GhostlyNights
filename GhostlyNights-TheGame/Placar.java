@@ -142,7 +142,7 @@ public class Placar extends World
     
     public void setPlayerInfo(String nomePlayer, long tempoSobrevivido)
     {
-        if(nomePlayer.length() <=1)
+        if(nomePlayer.length() <=1 || nomePlayer.length()>8)
         nomePlayer = "default";
         placarOrdenado.put(nomePlayer, tempoSobrevivido);
     }
