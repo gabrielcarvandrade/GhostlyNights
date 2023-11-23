@@ -8,9 +8,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class BarraDaUlt extends Barra
 {
-    private int maxUlt;
-    private int ult;
-    
     private GreenfootImage barra;
 
     
@@ -21,8 +18,6 @@ public class BarraDaUlt extends Barra
     public BarraDaUlt(Player player, int larguraOriginal) 
     {
         super(larguraOriginal, player);
-        maxUlt = 20;
-        ult = player.getPontosUlt();
         barra = new GreenfootImage(larguraOriginal, 10);
         atualizaImagem();
     }
@@ -38,19 +33,6 @@ public class BarraDaUlt extends Barra
         else
             // Se o jogador não estiver mais no mundo, remove a barra de HP
             getWorld().removeObject(this);
-        ult = getPlayer().getPontosUlt();
-        atualizaImagem();
-    }
-    
-    /**
-     * Método de atualização do tamanho da barra.
-     * Funciona ajustando o tamanho da barra com base na energia restante.
-     */
-    public void lançaUlt() 
-    {
-        ult -= 20;
-        if (ult < 0)
-            ult = 0;
         atualizaImagem();
     }
     
@@ -62,27 +44,22 @@ public class BarraDaUlt extends Barra
     {
         barra.clear();
         
-        if(ult == 20)
+        if(getPlayer().getPontosUlt() == 20)
         {
-            int novaLargura = (ult * getLarguraOriginal()) / maxUlt;
+            int novaLargura = (getPlayer().getPontosUlt() * getLarguraOriginal()) / getPlayer().getMaxUlt();
             barra.setColor(Color.YELLOW);
             barra.fillRect(0, 0, novaLargura, 10);
         }
         
-        if (ult > 0 && ult < 20) 
+        if (getPlayer().getPontosUlt() > 0 && getPlayer().getPontosUlt() < 20) 
         {
             // Calcula a nova largura da barra baseada no HP restante
-            int novaLargura = (ult * getLarguraOriginal()) / maxUlt;
+            int novaLargura = (getPlayer().getPontosUlt() * getLarguraOriginal()) / getPlayer().getMaxUlt();
             barra.setColor(Color.BLUE);
             barra.fillRect(0, 0, novaLargura, 10);
         }
         
         
         setImage(barra);
-    }
-    
-    public int getMaxUlt()
-    {
-        return maxUlt;
     }
 }

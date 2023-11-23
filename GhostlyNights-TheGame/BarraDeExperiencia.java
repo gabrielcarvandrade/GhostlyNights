@@ -8,9 +8,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class BarraDeExperiencia extends Barra
 {
-    private int experienciaNecessaria;
-    private int experiencia;
-    
     private GreenfootImage barra;
     private GreenfootImage esmeralda;
     private GreenfootImage bordaXp;
@@ -21,10 +18,9 @@ public class BarraDeExperiencia extends Barra
     public BarraDeExperiencia(int larguraOriginal, Player player) 
     {
         super(larguraOriginal, player);
-        experienciaNecessaria = 15*player.getNivelPlayer();
-        experiencia = player.getExperiencia();
         bordaXp = new GreenfootImage("BordaXP.png");
         barra = new GreenfootImage(larguraOriginal, 12);
+        
         atualizaImagem();
     }
     
@@ -36,8 +32,6 @@ public class BarraDeExperiencia extends Barra
         if (getPlayer() == null && getWorld() == null) 
             // Se o jogador não estiver mais no mundo, remove a barra de HP
             getWorld().removeObject(this);
-        experienciaNecessaria = 15*getPlayer().getNivelPlayer();
-        experiencia = getPlayer().getExperiencia();
         atualizaImagem();
     }
 
@@ -47,20 +41,14 @@ public class BarraDeExperiencia extends Barra
      */
     private void atualizaImagem() {
         barra.clear();
-        if (experiencia > 0) {
+        if (getPlayer().getExperiencia() > 0) {
+            getWorld().showText("Nivel "+ getPlayer().getNivelPlayer(), 650, 530);
+            
             // Calcula a nova largura da barra baseada na Xp que falta
-            int novaLargura = (experiencia * getLarguraOriginal()) / experienciaNecessaria;
+            int novaLargura = (getPlayer().getExperiencia() * getLarguraOriginal()) / getPlayer().getExperienciaNecessaria();
             barra.setColor(Color.GREEN);
             barra.fillRect(0, 0, novaLargura, 12);
         }
         setImage(barra);
-    }
-    
-    /**
-     * Retorna a experiencia necessaria para aumentar de nivel
-     */
-    public int getExperienciaNecessaria()
-    {
-        return experienciaNecessaria;
     }
 }
