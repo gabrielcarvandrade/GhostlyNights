@@ -34,7 +34,7 @@ public class MeuMundo extends World
     public MeuMundo(boolean modoAutomatico, Placar placar) 
     {
         super(800, 600, 1);
-        nomePlayer = Greenfoot.ask("Digite um nome para seu player");
+        nomePlayer = Greenfoot.ask("Digite um nome de no maximo 8 letras para seu player:");
         this.modoAutomatico = modoAutomatico;
         this.placar = placar;
         dificuldadePequena = false;

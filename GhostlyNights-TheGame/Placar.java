@@ -13,6 +13,7 @@ public class Placar extends World
     
     private boolean modoAutomatico;
     private boolean naoMostrou;
+    private boolean ehIgual;
     
     private GreenfootImage imagemPlacar;
     private HashMap<String, Long> placarDesordenado;
@@ -28,6 +29,7 @@ public class Placar extends World
         super(800, 600, 1);
         this.modoAutomatico = modoAutomatico;
         naoMostrou = false;
+        ehIgual = false;
         placarDesordenado = new HashMap<>();
         imagemPlacar = new GreenfootImage("placar.png");
         setBackground(imagemPlacar);
@@ -144,7 +146,21 @@ public class Placar extends World
     {
         if(nomePlayer.length() <=1 || nomePlayer.length()>8)
         nomePlayer = "default";
+        for(String nome : placarDesordenado.keySet())
+        {
+            if(nomePlayer.equals(nome))
+            {
+                ehIgual = true;
+                if(tempoSobrevivido > placarDesordenado.get(nome))
+                {
+                    placarDesordenado.remove(nome, tempoSobrevivido);
+                    placarDesordenado.put(nomePlayer, tempoSobrevivido);
+                }  
+            }
+        }
+        if(!ehIgual)
         placarDesordenado.put(nomePlayer, tempoSobrevivido);
+        ehIgual = false;
     }
     
     public void mudarNaoMostrou()
