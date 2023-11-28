@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Ult extends BolaDeFogo
+public class Ult extends Magia
 {
     private static int dano = getDano()*3;
     private GreenfootImage imagem;
@@ -23,19 +23,6 @@ public class Ult extends BolaDeFogo
         imagem = new GreenfootImage("magiaUlt.png");
         imagem.scale(40, 24);
         setImage(imagem);
-    }
-    
-    /**
-     * Define a movimentaçao da bola de fogo no jogo
-     * e chama o metodo colisaoInimigo se a bola de fogo nao estiver na borda do mundo
-     */
-    public void act()
-    {
-        move(getVelocidade());
-        if (!isAtEdge())
-            colisaoInimigo();
-        else
-            getWorld().removeObject(this);
     }
     
     /**

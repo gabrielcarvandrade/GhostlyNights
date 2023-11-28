@@ -7,14 +7,9 @@ import java.util.ArrayList;
  * @authors Gabriel Carvalho, Alexandre Carvalhaes, Douglas Slves, Ayron Sanfra. 
  * @version Marca 20.0
  */
-public class BolaDeFogo extends Actor
+public class BolaDeFogo extends Magia
 {
-    private int velocidade;
-    private static int dano = 10;
-    private int volume;
-    
     private GreenfootImage imagem;
-    private Player player;
 
     
     /**
@@ -25,26 +20,11 @@ public class BolaDeFogo extends Actor
      */
     public BolaDeFogo(Player player, int velocidade, int volume)
     {
-        this.player = player;
-        this.velocidade = velocidade;
+        super(player, velocidade, volume);
         dano = getDano();
-        this.volume = volume;
         imagem = new GreenfootImage("magia1.png");
         imagem.scale(19, 12);
         setImage(imagem);
-    }
-    
-    /**
-     * Define a movimentaçao da bola de fogo no jogo
-     * e chama o metodo colisaoInimigo se a bola de fogo nao estiver na borda do mundo
-     */
-    public void act()
-    {
-        move(velocidade);
-        if (!isAtEdge())
-            colisaoInimigo();
-        else
-            getWorld().removeObject(this);
     }
     
     /**
@@ -72,45 +52,5 @@ public class BolaDeFogo extends Actor
             }
             getWorld().removeObject(this);
         }
-    }
-    
-    /**
-     * Retorna o dano da bola de fogo
-     */
-    public static int getDano()
-    {
-        return dano;
-    }
-    
-    /**
-     * Retorna a velocidade da magia
-     */
-    public int getVelocidade()
-    {
-        return velocidade;
-    }
-    
-    /**
-     * Retorna o player
-     */ 
-    public Player getPlayer()
-    {
-        return player;
-    }
-    
-    /**
-     * Aumenta o dano da bola de fogo
-     */
-    public static void aumentarDano()
-    {
-        dano += 3;
-    }
-    
-    /**
-     * Metodo para reiniciar o dano da bola de fogo
-     */
-    public void reiniciarBolaDeFogo()
-    {
-        dano = 10;
     }
 }
