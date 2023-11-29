@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=Ult
+comment0.text=\n\ Write\ a\ description\ of\ class\ Ult\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=player\ velocidade\ volume
+comment1.target=Ult(Player,\ int,\ int)
+comment1.text=\n\ Construtor\ da\ classe\ BolaDeFogo\n\ Define\ sua\ velocidade\ de\ movimento,\n\ quanto\ de\ dano\ causa\ ao\ inimgo,\n\ e\ seu\ sprite\n
+comment2.params=
+comment2.target=void\ colisaoInimigo()
+comment2.text=\n\ Metodo\ que\ chama\ o\ metodo\ colisaoInimigo\ da\ classe\ pai\ BolaDeFogo\n
+numComments=3

@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=BolaDeFogo
+comment0.text=\n\ Classe\ que\ cuida\ da\ movimenta\u00E7ao\ e\ intera\u00E7ao\ do\ ataque\ do\ player\ aos\ seus\ inimigos\ por\ meio\ de\ objetos\ BolaDeFogo.\n\ \n\ @authors\ Gabriel\ Carvalho,\ Alexandre\ Carvalhaes,\ Douglas\ Slves,\ Ayron\ Sanfra.\ \n\ @version\ Marca\ 20.0\n
+comment1.params=player\ velocidade\ volume
+comment1.target=BolaDeFogo(Player,\ int,\ int)
+comment1.text=\n\ Construtor\ da\ classe\ BolaDeFogo\n\ Define\ sua\ velocidade\ de\ movimento,\n\ quanto\ de\ dano\ causa\ ao\ inimgo,\n\ e\ seu\ sprite\n
+comment2.params=
+comment2.target=void\ colisaoInimigo()
+comment2.text=\n\ Metodo\ que\ define\ o\ que\ ocorre\ quando\ um\ objeto\ BolaDeFogo\ se\ encontra\n\ com\ um\ objeto\ Inimigo\n\ Se\ existir\ um\ inimigo\ Inimigo\ com\ quem\ entra\ em\ contato\:\n\ causa\ dano\ ao\ inimigo\ e\ remove\ ele\ se\ sua\ vida\ ficar\ menor\ ou\ igual\ \n
+numComments=3
