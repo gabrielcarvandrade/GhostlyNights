@@ -10,9 +10,7 @@ public class MeuMundo extends World
 {
     private int cooldownSpawnFantasma;
     private int cooldownSpawnCoracao;
-    private int contadorDificuldade;
-    private long tempoSobrevivido;
-    
+    private int contadorDificuldade;    
     private String nomePlayer;
     
     private boolean modoAutomatico;
@@ -36,7 +34,6 @@ public class MeuMundo extends World
         cooldownSpawnFantasma = 60;
         cooldownSpawnCoracao = 660;
         contadorDificuldade = 0;
-        tempoSobrevivido = 0;
         
         //Salva numa variavel o nome do jogador baseado na entrada de informacao por uma caixa de pergunta
         nomePlayer = Greenfoot.ask("Digite um nome de no maximo 8 letras para seu player:");
@@ -92,11 +89,12 @@ public class MeuMundo extends World
             spawnarCoracoes();
             Som.regularVolume();
             aumentarVelocidadeSpawn();
-            tempoSobrevivido++;
         }
         //Caso ele nao esteja vivo, mostra o placar do jogo
         else {
-            mostrarPlacar();
+            long tempoSobrevivido = player.getTempo();
+            player.removeJogador();
+            mostrarPlacar(tempoSobrevivido);
         }
     }
     
@@ -136,7 +134,7 @@ public class MeuMundo extends World
         int randomizadorSpawn;
         
         //Randomiza a geraçao de inimigos
-        if (tempoSobrevivido % cooldownSpawnFantasma == 0) 
+        if (player.getTempo() % cooldownSpawnFantasma == 0) 
         {
             randomizadorLargura = Greenfoot.getRandomNumber(getWidth());
             randomizadorAltura = Greenfoot.getRandomNumber(getHeight());
@@ -160,7 +158,7 @@ public class MeuMundo extends World
         int randomizadorLargura;
         int randomizadorSpawn;
         //Randomiza a geracao de coracoes de cura
-        if (tempoSobrevivido % cooldownSpawnCoracao == 0) 
+        if (player.getTempo() % cooldownSpawnCoracao == 0) 
         {
             randomizadorLargura = Greenfoot.getRandomNumber(getWidth());
             randomizadorAltura = Greenfoot.getRandomNumber(getHeight());
@@ -171,12 +169,10 @@ public class MeuMundo extends World
     /**
      * Metodo responsavel pela geracao do placar.
      */
-    public void mostrarPlacar()
+    public void mostrarPlacar(Long tempoSobrevivido)
     {
-        //Calcula o tempo sobrevivido
-        tempoSobrevivido = tempoSobrevivido/60;
         //Envia as informacoes do nome do jogador, o tempo sobrevivido e o modo de jogo para o placar
-        placar.setPlayerInfo(nomePlayer, tempoSobrevivido, modoAutomatico);
+        placar.setPlayerInfo(nomePlayer, tempoSobrevivido/60, modoAutomatico);
         //Utilizado para o placar mostrar apenas uma vez
         placar.mudarNaoMostrou();
         //Coloca o placar como mundo atual
@@ -205,7 +201,7 @@ public class MeuMundo extends World
     private void aumentarVelocidadeSpawn()
     {
         //Verifica com base no tempo de jogo, quando eh necessario aumentar a velocidade de geracao do inimigo e sua quantidade
-        if(tempoSobrevivido % 500*Inimigo.getNivelInimigo() == 0)
+        if(player.getTempo() % 500*Inimigo.getNivelInimigo() == 0)
         {
             cooldownSpawnFantasma-=3;
             

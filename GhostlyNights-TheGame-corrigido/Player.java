@@ -27,7 +27,6 @@ public class Player extends Actor
     private Inimigo inimigoProximo;
     
     private boolean estaVivo;
-    private boolean removido;
     private boolean modoAutomatico;
 
     /**
@@ -65,7 +64,6 @@ public class Player extends Actor
         barraDeExperiencia = new BarraDeExperiencia(600, this);
         
         estaVivo = true;
-        removido = false;
         this.modoAutomatico = modoAutomatico;
     }
     
@@ -171,12 +169,6 @@ public class Player extends Actor
                 if (hp <= 0) 
                 {
                     estaVivo = false;
-
-                    if (!removido) 
-                    {
-                        removeJogador();
-                        removido = true;
-                    }
                 }
             }
         }
@@ -219,7 +211,7 @@ public class Player extends Actor
     /**
      * Método de remoção do jogador e da barra de HP
      */
-    private void removeJogador() 
+    public void removeJogador() 
     {
         World world = getWorld();
         if (world != null) 
