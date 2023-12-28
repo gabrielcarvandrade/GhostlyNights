@@ -1,7 +1,0 @@
-#BlueJ class context
-comment0.target=EsmeraldaDeXp
-comment0.text=\n\ Classe\ que\ representa\ a\ esmeralda,\ um\ objeto\ que\ concede\ experi\u00EAncia\ ao\ jogador.\n\ \n\ Autores\:\ Gabriel\ Carvalho,\ Alexandre\ Carvalhaes,\ Douglas\ Silves,\ Ayron\ Sanfra.\ \n\ Vers\u00E3o\:\ Marca\ 20.0\n
-comment1.params=
-comment1.target=EsmeraldaDeXp()
-comment1.text=\n\ Construtor\ da\ classe\ EsmeraldaDeXP.\n\ Inicializa\ a\ imagem\ da\ esmeralda\ e\ ajusta\ seu\ tamanho.\n
-numComments=2

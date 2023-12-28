@@ -40,7 +40,7 @@ Tem alta coesão?
 Sim
 
 Tem baixo acoplamento?
-Não
+Sim
 
 Usa design baseado em responsabilidade?
 Sim
@@ -49,7 +49,7 @@ Tem acoplamento implícito?
 Não
 
 Tem replicação de código?
-Sim
+Não
 
 Tem duas superclasses com subclasses com implementação útil?
 Sim
